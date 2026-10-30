@@ -1,17 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ── Base resets ─────────────────────────────────────────────────────────── */
+/* ── Toybox Factory Canvas Base ────────────────────────────────────────────── */
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
+  background-color: #f0f9ff;
+  color: #0f172a;
+  font-family: 'Fredoka', 'Nunito', system-ui, sans-serif;
+}
+
+body {
+  background-color: #f0f9ff;
+  background-image: radial-gradient(#bae6fd 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  color: #0f172a;
+  min-height: 100vh;
 }
 
 /* ── Focus rings ─────────────────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid #06b6d4;
-  outline-offset: 2px;
+  outline: 3px solid #0284c7;
+  outline-offset: 3px;
 }
 
 /* ── Game canvas touch behaviour ─────────────────────────────────────────── */
@@ -21,12 +34,82 @@ canvas {
   -webkit-user-select: none;
 }
 
-/* ── details/summary open animation ─────────────────────────────────────── */
+/* ── Tactile 3D Extrusion Physics ───────────────────────────────────────── */
+.btn-3d {
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.btn-3d:active {
+  transform: translateY(4px);
+  box-shadow: none !important;
+}
+
+.btn-3d-blue {
+  background-color: #0ea5e9;
+  box-shadow: 0 5px 0 0 #0284c7;
+}
+.btn-3d-blue:active {
+  box-shadow: none;
+}
+
+.btn-3d-green {
+  background-color: #10b981;
+  box-shadow: 0 5px 0 0 #059669;
+}
+.btn-3d-green:active {
+  box-shadow: none;
+}
+
+.btn-3d-orange {
+  background-color: #f97316;
+  box-shadow: 0 5px 0 0 #c2410c;
+}
+.btn-3d-orange:active {
+  box-shadow: none;
+}
+
+.btn-3d-purple {
+  background-color: #8b5cf6;
+  box-shadow: 0 5px 0 0 #6d28d9;
+}
+.btn-3d-purple:active {
+  box-shadow: none;
+}
+
+.btn-3d-amber {
+  background-color: #f59e0b;
+  box-shadow: 0 5px 0 0 #b45309;
+}
+.btn-3d-amber:active {
+  box-shadow: none;
+}
+
+/* ── Card 3D Depth ──────────────────────────────────────────────────────── */
+.card-3d {
+  background-color: #ffffff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 8px 0 0 #cbd5e1;
+  border-radius: 1.25rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-3d:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 0 0 #94a3b8;
+}
+
+/* ── Details / Summary Accordion Animation ──────────────────────────────── */
 details[open] summary > span:last-child {
   transform: rotate(180deg);
 }
 
-/* ── Prose overrides inside guide sections ───────────────────────────────── */
-.prose p {
-  margin-bottom: 0.75rem;
+/* ── Caution Stripe Header Accents ──────────────────────────────────────── */
+.stripe-caution {
+  background: repeating-linear-gradient(
+    -45deg,
+    #facc15,
+    #facc15 12px,
+    #0f172a 12px,
+    #0f172a 24px
+  );
 }
