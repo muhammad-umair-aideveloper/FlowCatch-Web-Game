@@ -46,11 +46,6 @@ const dimensions: Record<AdVariant, { w: number; h: number; cssW: string; cssH: 
 const dim = dimensions[variant];
 ---
 
-<!--
-  Slot wrapper: pre-sized via CSS to avoid CLS.
-  The inner div matches the ad unit dimensions exactly.
-  32px safety padding added via containing section on /play pages.
--->
 <div
   id={`ad-slot-${id}`}
   class={[
@@ -66,15 +61,27 @@ const dim = dimensions[variant];
   aria-label={label}
   role="complementary"
 >
-  <!-- Content placeholder — replaced by ad script at runtime -->
   <span class="text-factory-500 text-xs select-none pointer-events-none" aria-hidden="true">
     {label}
   </span>
 </div>
 
 <style>
-  /* Explicit width/height in CSS to guarantee CLS = 0 even before JS loads */
-  .ad-slot[data-variant="leaderboard"]    { min-height: 90px; }
-  .ad-slot[data-variant="mobile-banner"]  { min-height: 50px; }
-  .ad-slot[data-variant="rectangle"]     { min-height: 250px; }
+  /* Strict pre-sized dimensions to prevent layout shifts */
+  .ad-slot[data-variant="leaderboard"] {
+    min-width: min(100%, 728px);
+    min-height: 90px;
+    height: 90px;
+  }
+  .ad-slot[data-variant="mobile-banner"] {
+    min-width: min(100%, 320px);
+    min-height: 50px;
+    height: 50px;
+  }
+  .ad-slot[data-variant="rectangle"] {
+    min-width: 300px;
+    min-height: 250px;
+    width: 300px;
+    height: 250px;
+  }
 </style>
