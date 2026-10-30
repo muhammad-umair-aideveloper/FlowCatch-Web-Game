@@ -2,7 +2,7 @@
 /**
  * /play/[slug].astro
  * Dynamic static routes — one page per taxonomy pack.
- * Renders the game above the fold and the full SEO curriculum guide below.
+ * Renders the game above the fold and the colorful Toybox Curriculum Guide below.
  */
 import { getStaticPaths } from '../_utils/packPaths.ts';
 import SeoGameLayout from '../../layouts/SeoGameLayout.astro';
@@ -22,50 +22,79 @@ const canonicalUrl = `https://flowcatch-game.com/play/${pack.slug}`;
 // Peer packs for instant subject-switching
 import allPacks from '../../data/taxonomyPacks.json';
 const peerPacks = (allPacks as TaxonomyPack[]).filter(p => p.slug !== pack.slug);
+
+// Color accent for current subject
+const subjectColors: Record<string, string> = {
+  'English Language Arts': 'border-orange-400 text-orange-600',
+  'Physical Science': 'border-emerald-400 text-emerald-600',
+  'Social Studies / Civics': 'border-purple-400 text-purple-600',
+  'Chemistry': 'border-rose-400 text-rose-600',
+};
+const accentColor = subjectColors[pack.subjectCategory] || 'border-sky-400 text-sky-600';
 ---
 
 <SeoGameLayout {pack} {canonicalUrl}>
-  <!-- ── Above-the-fold ────────────────────────────────────────────────── -->
-  <div class="max-w-4xl mx-auto px-3 sm:px-4 pt-4">
+  <!-- ── Above-the-fold Game Section ───────────────────────────────────── -->
+  <div class="max-w-4xl mx-auto px-3 sm:px-4 pt-4 sm:pt-6">
 
-    <!-- Breadcrumbs (semantic, crawlable) -->
+    <!-- Playful Semantic Breadcrumbs -->
     <nav aria-label="Breadcrumb" class="mb-3">
-      <ol class="flex flex-wrap items-center gap-1 text-xs text-factory-500">
-        <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
-        <li aria-hidden="true" class="text-factory-700">›</li>
-        <li><a href="/" class="hover:text-white transition-colors">{pack.subjectCategory}</a></li>
-        <li aria-hidden="true" class="text-factory-700">›</li>
-        <li class="text-slate-300" aria-current="page">{pack.seoTitle}</li>
+      <ol class="flex flex-wrap items-center gap-1.5 text-xs font-bold text-slate-500">
+        <li>
+          <a href="/" class="bg-white hover:bg-sky-50 text-slate-700 hover:text-sky-600 border border-slate-200 px-2.5 py-1 rounded-lg shadow-sm transition-colors">
+            🏠 Home
+          </a>
+        </li>
+        <li aria-hidden="true" class="text-slate-400 font-black">›</li>
+        <li>
+          <span class="bg-white text-slate-700 border border-slate-200 px-2.5 py-1 rounded-lg shadow-sm">
+            {pack.subjectCategory}
+          </span>
+        </li>
+        <li aria-hidden="true" class="text-slate-400 font-black">›</li>
+        <li>
+          <span class="bg-sky-100 text-sky-900 border border-sky-300 px-2.5 py-1 rounded-lg shadow-sm" aria-current="page">
+            {pack.seoTitle}
+          </span>
+        </li>
       </ol>
     </nav>
 
-    <!-- H1 — above the fold, keyword-optimized -->
-    <h1 class="text-xl sm:text-2xl font-bold text-white mb-1 leading-tight">
+    <!-- H1 — Bold Toybox Heading -->
+    <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2 leading-tight font-display">
       {pack.h1Heading}
     </h1>
 
-    <!-- Sub-meta line -->
-    <p class="text-factory-400 text-xs mb-4 flex flex-wrap gap-3">
-      <span>📚 {pack.gradeLevel}</span>
-      <span>⏱️ ~{pack.estimatedPlayTimeMinutes} min</span>
-      <span>📋 {pack.curriculumStandard}</span>
-    </p>
+    <!-- Sub-meta Line with Playful Badge Chips -->
+    <div class="flex flex-wrap gap-2 text-xs font-bold text-slate-700 mb-5">
+      <span class="bg-white border-2 border-slate-200 px-3 py-1 rounded-xl shadow-sm flex items-center gap-1">
+        <span>🎓</span> {pack.gradeLevel}
+      </span>
+      <span class="bg-white border-2 border-slate-200 px-3 py-1 rounded-xl shadow-sm flex items-center gap-1">
+        <span>⏱️</span> ~{pack.estimatedPlayTimeMinutes} min session
+      </span>
+      <span class="bg-white border-2 border-slate-200 px-3 py-1 rounded-xl shadow-sm flex items-center gap-1">
+        <span>📋</span> {pack.curriculumStandard}
+      </span>
+    </div>
 
-    <!-- ── Game section (main canvas + bins) with strict 32px safety clearance ── -->
+    <!-- ── Conveyor Arena Component with 32px safety clearance ───────────── -->
     <section id="game-section" aria-label="Interactive sorting game" class="mb-8">
       <ConveyorGame {pack} />
     </section>
 
-    <!-- ── Instant subject-switch links ───────────────────────────────── -->
-    <div class="mb-8">
-      <p class="text-factory-400 text-xs mb-2 uppercase tracking-widest">Also play:</p>
-      <div class="flex flex-wrap gap-2">
+    <!-- ── Instant Subject-Switch Bar (Tactile 3D Buttons) ──────────────── -->
+    <div class="mb-8 bg-white border-3 border-slate-200 rounded-2xl p-4 shadow-sm">
+      <p class="text-xs font-black text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+        <span>🎮</span> Switch Game Mode:
+      </p>
+      <div class="flex flex-wrap gap-2.5">
         {peerPacks.map(p => (
           <a
             href={`/play/${p.slug}`}
-            class="text-xs px-3 py-1.5 rounded-lg bg-factory-800 text-slate-300
-                   border border-factory-700 hover:bg-factory-700 hover:text-white
-                   transition-colors"
+            class="btn-3d text-xs font-black px-3.5 py-2 rounded-xl bg-slate-50 text-slate-800
+                   border-2 border-slate-200 border-b-4 border-slate-300 hover:border-sky-400 hover:text-sky-600
+                   shadow-sm active:translate-y-0.5 active:border-b-2 transition-all"
           >
             {p.bins.map(b => b.label).join(' / ')}
           </a>
@@ -73,73 +102,80 @@ const peerPacks = (allPacks as TaxonomyPack[]).filter(p => p.slug !== pack.slug)
       </div>
     </div>
 
-    <!-- ── Sidebar rect ad (desktop only) — 32px buffer away from bins ── -->
+    <!-- ── Pre-sized Desktop Rectangle Ad (32px Buffer) ──────────────────── -->
     <div class="hidden lg:flex justify-end mb-8 pt-2">
       <AdSlot variant="rectangle" id="sidebar-rect" />
     </div>
   </div>
 
-  <!-- ── Below-the-fold: Teacher & Student Curriculum Guide ────────────── -->
+  <!-- ── Below-the-fold: Teacher & Student Toybox Curriculum Guide ──────── -->
   <article
     class="max-w-4xl mx-auto px-3 sm:px-4 pb-16"
     aria-label="Curriculum guide for teachers and students"
   >
-    <hr class="border-factory-700 mb-8" />
+    <!-- Section Header -->
+    <div class="flex items-center gap-3 mb-6">
+      <span class="text-3xl" aria-hidden="true">📖</span>
+      <div>
+        <h2 class="text-2xl font-black text-slate-900 font-display">
+          Teacher &amp; Student Curriculum Guide
+        </h2>
+        <p class="text-xs font-bold text-slate-500">Standards-aligned pedagogical support, rules, and common mistakes</p>
+      </div>
+    </div>
 
-    <h2 class="text-xl font-bold text-white mb-3">
-      Teacher &amp; Student Curriculum Guide
-    </h2>
-
-    <!-- Overview -->
-    <section class="mb-8" aria-labelledby="guide-overview">
-      <h3 id="guide-overview" class="text-lg font-semibold text-arcade-cyan mb-2">
-        Overview
+    <!-- 1. Pedagogical Overview Flashcard -->
+    <section class="mb-6 bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-toy-md" aria-labelledby="guide-overview">
+      <h3 id="guide-overview" class="text-lg font-black text-sky-700 mb-2 font-display flex items-center gap-2">
+        <span>💡</span> Pedagogical Overview
       </h3>
-      <p class="text-slate-300 leading-relaxed text-sm">
+      <p class="text-slate-700 leading-relaxed text-sm font-medium">
         {pack.seoGuideContent.overview}
       </p>
     </section>
 
-    <!-- Pedagogical objectives -->
-    <section class="mb-8" aria-labelledby="guide-objectives">
-      <h3 id="guide-objectives" class="text-lg font-semibold text-arcade-cyan mb-3">
-        Learning Objectives
+    <!-- 2. Learning Objectives Flashcard -->
+    <section class="mb-6 bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-toy-md" aria-labelledby="guide-objectives">
+      <h3 id="guide-objectives" class="text-lg font-black text-emerald-700 mb-3 font-display flex items-center gap-2">
+        <span>🎯</span> Learning Objectives
       </h3>
-      <ul class="space-y-2">
+      <div class="grid sm:grid-cols-2 gap-2.5">
         {pack.seoGuideContent.pedagogicalObjectives.map((obj) => (
-          <li class="flex gap-2 text-sm text-slate-300">
-            <span class="text-arcade-neon mt-0.5 shrink-0" aria-hidden="true">✓</span>
-            <span>{obj}</span>
-          </li>
+          <div class="flex items-start gap-2.5 bg-emerald-50/70 border border-emerald-200 rounded-2xl p-3 text-xs font-bold text-emerald-950">
+            <span class="text-emerald-600 text-sm mt-0.5 shrink-0" aria-hidden="true">✓</span>
+            <span class="leading-snug">{obj}</span>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
 
-    <!-- Sorting Rules Table (semantic HTML for crawlers) -->
-    <section class="mb-8" aria-labelledby="guide-rules">
-      <h3 id="guide-rules" class="text-lg font-semibold text-arcade-cyan mb-3">
-        Sorting Rules Reference
+    <!-- 3. Sorting Rules Reference (Colorful Accessible HTML Table) -->
+    <section class="mb-6 bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-toy-md" aria-labelledby="guide-rules">
+      <h3 id="guide-rules" class="text-lg font-black text-purple-700 mb-3 font-display flex items-center gap-2">
+        <span>📊</span> Sorting Rules Reference
       </h3>
-      <div class="overflow-x-auto rounded-xl border border-factory-700">
-        <table class="w-full text-sm" aria-label="Sorting rules for each category">
+      <div class="overflow-x-auto rounded-2xl border-2 border-slate-200">
+        <table class="w-full text-xs font-semibold text-slate-800" aria-label="Sorting rules for each category">
           <thead>
-            <tr class="bg-factory-800 border-b border-factory-700">
-              <th scope="col" class="text-left px-4 py-3 text-slate-300 font-semibold">Category</th>
-              <th scope="col" class="text-left px-4 py-3 text-slate-300 font-semibold">Sorting Criteria</th>
-              <th scope="col" class="text-left px-4 py-3 text-slate-300 font-semibold hidden sm:table-cell">Examples</th>
-              <th scope="col" class="text-left px-4 py-3 text-slate-300 font-semibold hidden md:table-cell">Key Indicator</th>
+            <tr class="bg-slate-100 border-b-2 border-slate-200 text-slate-900 font-black">
+              <th scope="col" class="text-left px-4 py-3 font-display text-sm">Category</th>
+              <th scope="col" class="text-left px-4 py-3">Sorting Criteria</th>
+              <th scope="col" class="text-left px-4 py-3 hidden sm:table-cell">Examples</th>
+              <th scope="col" class="text-left px-4 py-3 hidden md:table-cell">Key Indicator</th>
             </tr>
           </thead>
           <tbody>
             {pack.seoGuideContent.sortingRulesTable.map((row, i) => (
-              <tr class={`border-b border-factory-700/50 ${i % 2 === 0 ? 'bg-factory-900' : 'bg-factory-950'}`}>
-                <td class="px-4 py-3 font-semibold text-white whitespace-nowrap">{row.category}</td>
-                <td class="px-4 py-3 text-slate-300">{row.criteria}</td>
-                <td class="px-4 py-3 text-slate-400 hidden sm:table-cell">
-                  {row.examples.slice(0, 3).join(', ')}
-                  {row.examples.length > 3 && <span class="text-factory-500"> +{row.examples.length - 3} more</span>}
+              <tr class={`border-b border-slate-100 ${i % 2 === 0 ? 'bg-white' : 'bg-slate-50/70'}`}>
+                <td class="px-4 py-3 font-black text-slate-900 whitespace-nowrap font-display text-sm">
+                  {row.category}
                 </td>
-                <td class="px-4 py-3 text-slate-400 hidden md:table-cell italic">{row.keyIndicator}</td>
+                <td class="px-4 py-3 text-slate-700 leading-snug">{row.criteria}</td>
+                <td class="px-4 py-3 text-slate-600 hidden sm:table-cell">
+                  {row.examples.slice(0, 3).join(', ')}
+                  {row.examples.length > 3 && <span class="text-slate-400"> +{row.examples.length - 3} more</span>}
+                </td>
+                <td class="px-4 py-3 text-slate-500 hidden md:table-cell italic">{row.keyIndicator}</td>
               </tr>
             ))}
           </tbody>
@@ -147,50 +183,58 @@ const peerPacks = (allPacks as TaxonomyPack[]).filter(p => p.slug !== pack.slug)
       </div>
     </section>
 
-    <!-- Common mistakes -->
-    <section class="mb-8" aria-labelledby="guide-mistakes">
-      <h3 id="guide-mistakes" class="text-lg font-semibold text-arcade-cyan mb-3">
-        Common Mistakes &amp; Corrections
+    <!-- 4. Common Mistakes & Corrections (Stylized Flashcards with Chips) -->
+    <section class="mb-6 bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-toy-md" aria-labelledby="guide-mistakes">
+      <h3 id="guide-mistakes" class="text-lg font-black text-rose-700 mb-3 font-display flex items-center gap-2">
+        <span>⚠️</span> Common Student Mistakes &amp; Corrections
       </h3>
-      <div class="space-y-4">
+      <div class="space-y-3.5">
         {pack.seoGuideContent.commonStudentMistakes.map((m) => (
-          <div class="bg-factory-900 rounded-xl border border-factory-700 p-4">
-            <p class="text-sm text-red-400 mb-1">
-              <span class="font-semibold">❌ Mistake:</span> {m.mistake}
+          <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 shadow-sm">
+            <div class="flex items-start gap-2.5 mb-2">
+              <span class="inline-flex items-center gap-1 bg-red-100 text-red-800 text-[11px] font-black px-2 py-0.5 rounded-lg shrink-0">
+                <span>❌</span> Mistake
+              </span>
+              <p class="text-xs font-bold text-red-950 leading-snug">{m.mistake}</p>
+            </div>
+            <div class="flex items-start gap-2.5 mb-2">
+              <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-[11px] font-black px-2 py-0.5 rounded-lg shrink-0">
+                <span>✅</span> Correction
+              </span>
+              <p class="text-xs font-bold text-emerald-950 leading-snug">{m.correction}</p>
+            </div>
+            <p class="text-[11px] text-slate-500 font-medium italic pl-1 border-l-2 border-slate-300 ml-1 mt-1">
+              {m.why}
             </p>
-            <p class="text-sm text-green-400 mb-1">
-              <span class="font-semibold">✅ Correction:</span> {m.correction}
-            </p>
-            <p class="text-xs text-slate-400 italic">{m.why}</p>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- FAQ accordion -->
-    <section aria-labelledby="guide-faq">
-      <h3 id="guide-faq" class="text-lg font-semibold text-arcade-cyan mb-3">
-        Frequently Asked Questions
+    <!-- 5. FAQ Accordion Panels -->
+    <section class="bg-white border-3 border-slate-200 rounded-3xl p-6 shadow-toy-md" aria-labelledby="guide-faq">
+      <h3 id="guide-faq" class="text-lg font-black text-sky-700 mb-3 font-display flex items-center gap-2">
+        <span>❓</span> Frequently Asked Questions
       </h3>
       <div class="space-y-3" itemscope itemtype="https://schema.org/FAQPage">
         {pack.seoGuideContent.faqs.map((faq) => (
           <details
-            class="bg-factory-900 rounded-xl border border-factory-700 group"
+            class="bg-slate-50 rounded-2xl border-2 border-slate-200 group overflow-hidden transition-all duration-150"
             itemscope
             itemprop="mainEntity"
             itemtype="https://schema.org/Question"
           >
             <summary
-              class="flex items-center justify-between px-4 py-3 cursor-pointer
-                     list-none text-sm font-medium text-white hover:text-arcade-cyan
-                     transition-colors select-none"
+              class="flex items-center justify-between px-4 py-3.5 cursor-pointer
+                     list-none text-xs sm:text-sm font-black text-slate-900 hover:text-sky-600
+                     transition-colors select-none font-display"
               itemprop="name"
             >
               <span>{faq.question}</span>
-              <span class="ml-2 text-factory-500 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+              <span class="ml-2 text-slate-400 group-open:rotate-180 transition-transform font-bold" aria-hidden="true">▼</span>
             </summary>
             <div
-              class="px-4 pb-4 text-sm text-slate-300 leading-relaxed border-t border-factory-700 pt-3"
+              class="px-4 pb-4 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200 pt-3 font-medium bg-white"
               itemscope
               itemprop="acceptedAnswer"
               itemtype="https://schema.org/Answer"
@@ -202,11 +246,11 @@ const peerPacks = (allPacks as TaxonomyPack[]).filter(p => p.slug !== pack.slug)
       </div>
     </section>
 
-    <!-- Bottom leaderboard refresh point -->
-    <div class="hidden md:flex justify-center mt-10">
+    <!-- Bottom Leaderboard Ad -->
+    <div class="hidden md:flex justify-center mt-12">
       <AdSlot variant="leaderboard" id="bottom-leaderboard" />
     </div>
-    <div class="flex justify-center mt-6 md:hidden">
+    <div class="flex justify-center mt-8 md:hidden">
       <AdSlot variant="rectangle" id="bottom-rect-mobile" />
     </div>
   </article>
