@@ -3,6 +3,7 @@
  * SeoGameLayout.astro
  * Shared layout: injects keyword-optimized meta, JSON-LD structured data,
  * and a sticky mobile banner with 32px safety margin above the game bins.
+ * Styled with the bright "Toybox Factory" design system.
  */
 import type { TaxonomyPack } from '../types/game.ts';
 import AdSlot from '../components/ads/AdSlot.astro';
@@ -139,60 +140,75 @@ const jsonLd = {
     <!-- JSON-LD Structured Data Graph -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-    <!-- Global fonts preconnect -->
+    <!-- Google Fonts: Fredoka & Nunito -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
 
-  <body class="bg-factory-950 text-slate-200 min-h-screen font-sans antialiased">
+  <body class="bg-sky-50 text-slate-900 min-h-screen font-sans antialiased selection:bg-yellow-300 selection:text-slate-900">
     <!-- Skip link (a11y) -->
     <a
       href="#game-section"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4
-             focus:z-50 focus:bg-arcade-cyan focus:text-factory-950
-             focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold"
+             focus:z-50 focus:bg-yellow-400 focus:text-slate-900 focus:border-2 focus:border-slate-900
+             focus:px-5 focus:py-2.5 focus:rounded-2xl focus:font-black focus:shadow-toy-md"
     >
       Skip to game
     </a>
 
     <!-- Top Leaderboard Ad (desktop) — pre-sized 728×90 with 32px+ separation -->
-    <div class="hidden md:flex justify-center py-2 bg-factory-900 border-b border-factory-800">
+    <div class="hidden md:flex justify-center py-3 bg-sky-100/70 border-b border-sky-200">
       <AdSlot variant="leaderboard" id="top-leaderboard" />
     </div>
 
-    <!-- Site header -->
-    <header class="bg-factory-900 border-b border-factory-800 px-4 py-3">
-      <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
-        <a href="/" class="text-arcade-cyan font-bold text-lg hover:text-sky-300 transition-colors">
-          🏭 FlowCatch
+    <!-- Cheerful Toybox Header -->
+    <header class="bg-white/95 backdrop-blur-md border-b-4 border-slate-200 px-4 py-3.5 shadow-sm sticky top-0 z-30">
+      <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-2 group">
+          <span class="text-3xl filter drop-shadow group-hover:rotate-12 transition-transform duration-200" aria-hidden="true">🏭</span>
+          <span class="text-2xl font-black text-sky-600 tracking-tight font-display group-hover:text-sky-500 transition-colors">
+            FlowCatch
+          </span>
         </a>
         <nav aria-label="Subject packs">
-          <ul class="flex flex-wrap gap-2 text-xs">
+          <ul class="flex flex-wrap gap-2 text-xs font-bold">
             <li>
-              <a href="/play/noun-verb-adjective-sorting-game"
-                class="text-slate-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-factory-800">
-                English
+              <a
+                href="/play/noun-verb-adjective-sorting-game"
+                class="inline-block bg-sky-100 hover:bg-sky-200 text-sky-800 border-2 border-sky-300 px-3 py-1.5 rounded-xl transition-all shadow-sm active:translate-y-0.5"
+              >
+                📝 English
               </a>
             </li>
             <li>
-              <a href="/play/solid-liquid-gas-states-of-matter-game"
-                class="text-slate-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-factory-800">
-                Science
+              <a
+                href="/play/solid-liquid-gas-states-of-matter-game"
+                class="inline-block bg-emerald-100 hover:bg-emerald-200 text-emerald-800 border-2 border-emerald-300 px-3 py-1.5 rounded-xl transition-all shadow-sm active:translate-y-0.5"
+              >
+                🧪 Science
               </a>
             </li>
             <li>
-              <a href="/play/democracy-monarchy-dictatorship-civics-game"
-                class="text-slate-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-factory-800">
-                Civics
+              <a
+                href="/play/democracy-monarchy-dictatorship-civics-game"
+                class="inline-block bg-purple-100 hover:bg-purple-200 text-purple-800 border-2 border-purple-300 px-3 py-1.5 rounded-xl transition-all shadow-sm active:translate-y-0.5"
+              >
+                🏛️ Civics
               </a>
             </li>
             <li>
-              <a href="/play/acids-bases-salts-chemistry-sorting-game"
-                class="text-slate-400 hover:text-white transition-colors px-2 py-1 rounded hover:bg-factory-800">
-                Chemistry
+              <a
+                href="/play/acids-bases-salts-chemistry-sorting-game"
+                class="inline-block bg-amber-100 hover:bg-amber-200 text-amber-800 border-2 border-amber-300 px-3 py-1.5 rounded-xl transition-all shadow-sm active:translate-y-0.5"
+              >
+                ⚗️ Chemistry
               </a>
             </li>
           </ul>
@@ -205,25 +221,37 @@ const jsonLd = {
       <slot />
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-factory-900 border-t border-factory-800 mt-16 py-8 px-4 text-center text-factory-500 text-xs">
-      <p class="mb-1">
-        &copy; {new Date().getFullYear()} FlowCatch — Free Educational Games
-      </p>
-      <p>
-        <a href="/" class="hover:text-white transition-colors">Home</a>
-        {' · '}
-        <a href="/privacy" class="hover:text-white transition-colors">Privacy</a>
-        {' · '}
-        <a href="/contact" class="hover:text-white transition-colors">Contact</a>
-      </p>
+    <!-- Playful Toybox Footer -->
+    <footer class="bg-white border-t-4 border-slate-200 mt-20 py-10 px-4 text-center text-slate-500 text-sm font-medium">
+      <div class="max-w-4xl mx-auto flex flex-col items-center gap-3">
+        <div class="flex items-center gap-2 text-lg font-bold text-slate-800">
+          <span>🏭 FlowCatch</span>
+          <span class="text-slate-300">·</span>
+          <span class="text-xs bg-yellow-300 text-yellow-950 font-black px-2.5 py-0.5 rounded-full border border-yellow-400">
+            K-8 LEARNING
+          </span>
+        </div>
+        <p class="text-slate-600 text-xs max-w-md">
+          Hands-on educational conveyor belt sorting games designed for Chromebooks, tablets, and classroom interactive screens.
+        </p>
+        <p class="text-xs text-slate-400 pt-2 flex items-center gap-3">
+          <a href="/" class="hover:text-sky-600 transition-colors font-semibold">Home</a>
+          <span>•</span>
+          <a href="/privacy" class="hover:text-sky-600 transition-colors font-semibold">Privacy</a>
+          <span>•</span>
+          <a href="/contact" class="hover:text-sky-600 transition-colors font-semibold">Contact</a>
+        </p>
+        <p class="text-[11px] text-slate-400">
+          &copy; {new Date().getFullYear()} FlowCatch — Free Educational Games for Classrooms & Students
+        </p>
+      </div>
     </footer>
 
     <!-- Mobile Sticky Bottom Banner (strictly 32px safety clearance above game bins) -->
     <div
       id="mobile-sticky-ad"
       class="md:hidden fixed bottom-0 left-0 right-0 z-40
-             flex justify-center py-1 bg-factory-900 border-t border-factory-800"
+             flex justify-center py-1.5 bg-white/95 backdrop-blur-md border-t-2 border-slate-200 shadow-md"
       style="padding-bottom: env(safe-area-inset-bottom, 0px);"
     >
       <AdSlot variant="mobile-banner" id="bottom-sticky" />
@@ -239,8 +267,8 @@ const jsonLd = {
   @tailwind utilities;
 
   :focus-visible {
-    outline: 2px solid #06b6d4;
-    outline-offset: 2px;
+    outline: 3px solid #0284c7;
+    outline-offset: 3px;
   }
 
   html, body {
