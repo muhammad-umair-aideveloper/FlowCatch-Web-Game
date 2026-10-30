@@ -51,14 +51,13 @@ const peerPacks = (allPacks as TaxonomyPack[]).filter(p => p.slug !== pack.slug)
       <span>📋 {pack.curriculumStandard}</span>
     </p>
 
-    <!-- ── Game section (main canvas + bins) ──────────────────────────── -->
-    <section id="game-section" aria-label="Interactive sorting game">
-      <!-- 32px safety margin: ad slot is outside/below, not overlapping bins -->
+    <!-- ── Game section (main canvas + bins) with strict 32px safety clearance ── -->
+    <section id="game-section" aria-label="Interactive sorting game" class="mb-8">
       <ConveyorGame {pack} />
     </section>
 
     <!-- ── Instant subject-switch links ───────────────────────────────── -->
-    <div class="mt-4 mb-6">
+    <div class="mb-8">
       <p class="text-factory-400 text-xs mb-2 uppercase tracking-widest">Also play:</p>
       <div class="flex flex-wrap gap-2">
         {peerPacks.map(p => (
@@ -74,8 +73,8 @@ const peerPacks = (allPacks as TaxonomyPack[]).filter(p => p.slug !== pack.slug)
       </div>
     </div>
 
-    <!-- ── Sidebar rect ad (desktop only) — above the guide ──────────── -->
-    <div class="hidden lg:flex justify-end mb-4">
+    <!-- ── Sidebar rect ad (desktop only) — 32px buffer away from bins ── -->
+    <div class="hidden lg:flex justify-end mb-8 pt-2">
       <AdSlot variant="rectangle" id="sidebar-rect" />
     </div>
   </div>
@@ -174,7 +173,7 @@ const peerPacks = (allPacks as TaxonomyPack[]).filter(p => p.slug !== pack.slug)
         Frequently Asked Questions
       </h3>
       <div class="space-y-3" itemscope itemtype="https://schema.org/FAQPage">
-        {pack.seoGuideContent.faqs.map((faq, i) => (
+        {pack.seoGuideContent.faqs.map((faq) => (
           <details
             class="bg-factory-900 rounded-xl border border-factory-700 group"
             itemscope
