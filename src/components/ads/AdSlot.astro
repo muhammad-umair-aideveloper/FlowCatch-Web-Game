@@ -1,7 +1,7 @@
 ---
 /**
  * AdSlot.astro
- * Zero-CLS pre-sized ad containers with safety buffer around game bins.
+ * Zero-CLS pre-sized ad containers styled as clean toybox billboard frames.
  * Pre-sizes every slot in CSS before the ad script loads to prevent layout shift.
  *
  * Usage:
@@ -51,7 +51,7 @@ const dim = dimensions[variant];
   class={[
     'ad-slot',
     'flex items-center justify-center overflow-hidden',
-    'bg-factory-900 border border-factory-700/50',
+    'bg-white/90 border-2 border-dashed border-sky-300 rounded-2xl shadow-sm',
     dim.cssW,
     dim.cssH,
     className,
@@ -61,13 +61,14 @@ const dim = dimensions[variant];
   aria-label={label}
   role="complementary"
 >
-  <span class="text-factory-500 text-xs select-none pointer-events-none" aria-hidden="true">
-    {label}
+  <span class="text-sky-600/70 font-semibold text-xs select-none pointer-events-none tracking-wider uppercase flex items-center gap-1.5" aria-hidden="true">
+    <span>📢</span>
+    <span>{label}</span>
   </span>
 </div>
 
 <style>
-  /* Strict pre-sized dimensions to prevent layout shifts */
+  /* Strict pre-sized dimensions to guarantee CLS = 0 */
   .ad-slot[data-variant="leaderboard"] {
     min-width: min(100%, 728px);
     min-height: 90px;
