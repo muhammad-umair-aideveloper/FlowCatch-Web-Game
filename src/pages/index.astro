@@ -2,7 +2,7 @@
 /**
  * index.astro
  * Filterable hub homepage — lists all subject packs with subject filter chips.
- * Full JSON-LD SoftwareApplication + ItemList structured data.
+ * Styled with the vibrant "Toybox Factory" design system (Duolingo / Blooket inspired).
  */
 import type { TaxonomyPack } from '../types/game.ts';
 import AdSlot from '../components/ads/AdSlot.astro';
@@ -55,6 +55,14 @@ const jsonLd = {
 };
 
 const subjects = [...new Set(packs.map(p => p.subjectCategory))];
+
+// Visual color strip themes for subjects
+const subjectStrips: Record<string, { bar: string; icon: string }> = {
+  'English Language Arts': { bar: 'bg-orange-500', icon: '📝' },
+  'Physical Science': { bar: 'bg-emerald-500', icon: '🧪' },
+  'Social Studies / Civics': { bar: 'bg-purple-500', icon: '🏛️' },
+  'Chemistry': { bar: 'bg-rose-500', icon: '⚗️' },
+};
 ---
 
 <!doctype html>
@@ -72,9 +80,17 @@ const subjects = [...new Set(packs.map(p => p.subjectCategory))];
     <meta property="og:description" content="Play free curriculum-aligned conveyor belt sorting games. English Grammar, Science, Civics, and Chemistry." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
-  <body class="bg-factory-950 text-slate-200 font-sans antialiased min-h-screen">
+  <body class="bg-sky-50 text-slate-900 font-sans antialiased min-h-screen selection:bg-yellow-300 selection:text-slate-900">
     <style>
       @tailwind base;
       @tailwind components;
@@ -82,114 +98,138 @@ const subjects = [...new Set(packs.map(p => p.subjectCategory))];
       html { overflow-x: hidden; }
     </style>
 
-    <!-- Top ad -->
-    <div class="hidden md:flex justify-center py-2 bg-factory-900 border-b border-factory-800">
+    <!-- Top ad bar -->
+    <div class="hidden md:flex justify-center py-3 bg-sky-100/70 border-b border-sky-200">
       <AdSlot variant="leaderboard" id="home-top" />
     </div>
 
-    <!-- Header -->
-    <header class="bg-factory-900 border-b border-factory-800 px-4 py-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="flex items-center gap-3 mb-1">
-          <span class="text-3xl" aria-hidden="true">🏭</span>
-          <h1 class="text-2xl font-bold text-white">FlowCatch</h1>
+    <!-- Cheerful Toybox Header -->
+    <header class="bg-white/95 backdrop-blur-md border-b-4 border-slate-200 px-4 py-4 shadow-sm sticky top-0 z-30">
+      <div class="max-w-5xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="text-4xl filter drop-shadow animate-bounce-subtle" aria-hidden="true">🏭</span>
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black text-sky-600 font-display tracking-tight leading-none">
+              FlowCatch
+            </h1>
+            <p class="text-xs font-bold text-slate-400 mt-0.5">The Conveyor Belt Sorter</p>
+          </div>
         </div>
-        <p class="text-factory-400 text-sm">Free educational conveyor belt sorting games — no signup, works on any device</p>
+        <div class="hidden sm:flex items-center gap-2">
+          <span class="text-xs bg-yellow-300 text-yellow-950 font-black px-3 py-1 rounded-full border border-yellow-400 shadow-sm uppercase tracking-wide">
+            Free K-8 Arcade
+          </span>
+        </div>
       </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-8">
+    <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12">
 
-      <!-- Hero copy -->
-      <section class="text-center mb-10" aria-labelledby="hero-heading">
-        <h2 id="hero-heading" class="text-3xl sm:text-4xl font-bold text-white mb-3 leading-tight">
-          The Conveyor Belt Sorter
+      <!-- Hero Header -->
+      <section class="text-center mb-10 sm:mb-12" aria-labelledby="hero-heading">
+        <div class="inline-block bg-sky-100 border-2 border-sky-300 px-4 py-1.5 rounded-full mb-3 text-sky-800 text-xs font-black uppercase tracking-wider shadow-sm">
+          ⚡ 100% Free · No Logins · Classroom Ready
+        </div>
+        <h2 id="hero-heading" class="text-3xl sm:text-5xl font-black text-slate-900 mb-3 sm:mb-4 leading-tight font-display tracking-tight">
+          Sort The Factory Crates! 📦
         </h2>
-        <p class="text-slate-400 max-w-xl mx-auto text-base leading-relaxed">
-          Drag and sort items on an animated factory conveyor belt to master English Grammar, States of Matter, Government Systems, and Chemistry — aligned to Common Core and NGSS standards.
+        <p class="text-slate-600 max-w-xl mx-auto text-base sm:text-lg font-semibold leading-relaxed">
+          Catch crates rolling on the moving conveyor belt and sort them into the right buckets before they reach the furnace!
         </p>
       </section>
 
-      <!-- Subject filter chips -->
+      <!-- Tactile 3D Subject Filter Chips -->
       <div
-        class="flex flex-wrap gap-2 justify-center mb-6"
+        class="flex flex-wrap gap-2.5 justify-center mb-8"
         role="group"
         aria-label="Filter by subject"
         id="subject-filters"
       >
         <button
           data-filter="all"
-          class="filter-chip active text-xs px-4 py-1.5 rounded-full border transition-colors
-                 bg-arcade-cyan text-factory-950 border-arcade-cyan font-semibold"
+          class="filter-chip active btn-3d text-xs sm:text-sm px-5 py-2.5 rounded-2xl transition-all
+                 bg-sky-500 text-white border-b-4 border-sky-700 shadow-toy-sm font-black"
           aria-pressed="true"
         >
-          All Subjects
+          🌟 All Subjects
         </button>
-        {subjects.map(subj => (
-          <button
-            data-filter={subj}
-            class="filter-chip text-xs px-4 py-1.5 rounded-full border transition-colors
-                   bg-factory-800 text-slate-300 border-factory-700
-                   hover:bg-factory-700 hover:text-white"
-            aria-pressed="false"
-          >
-            {subj}
-          </button>
-        ))}
+        {subjects.map(subj => {
+          const sTheme = subjectStrips[subj];
+          return (
+            <button
+              data-filter={subj}
+              class="filter-chip btn-3d text-xs sm:text-sm px-4 py-2.5 rounded-2xl transition-all
+                     bg-white text-slate-700 border-2 border-slate-200 border-b-4 border-slate-300
+                     hover:border-sky-300 hover:text-sky-600 font-extrabold shadow-toy-sm"
+              aria-pressed="false"
+            >
+              {sTheme ? `${sTheme.icon} ${subj}` : subj}
+            </button>
+          );
+        })}
       </div>
 
-      <!-- Pack grid -->
+      <!-- Playful White Game Cards with 3D Depth -->
       <div
         id="pack-grid"
-        class="grid sm:grid-cols-2 gap-4"
+        class="grid sm:grid-cols-2 gap-6"
         role="list"
         aria-label="Available sorting games"
       >
-        {packs.map((pack) => (
-          <article
-            class="pack-card bg-factory-900 border border-factory-700 rounded-2xl p-5
-                   hover:border-arcade-cyan/60 transition-all duration-200
-                   hover:shadow-lg hover:shadow-arcade-cyan/10 group"
-            data-subject={pack.subjectCategory}
-            role="listitem"
-          >
-            <!-- Bins preview pills -->
-            <div class="flex flex-wrap gap-1.5 mb-3" aria-hidden="true">
-              {pack.bins.map(bin => (
-                <span
-                  class={`text-xs px-2 py-0.5 rounded-full font-mono ${bin.colorTheme.pillBg} ${bin.colorTheme.text}`}
-                >
-                  {bin.icon} {bin.label}
-                </span>
-              ))}
-            </div>
-
-            <h3 class="text-base font-bold text-white mb-1 leading-snug group-hover:text-arcade-cyan transition-colors">
-              {pack.h1Heading}
-            </h3>
-
-            <div class="flex items-center gap-3 text-xs text-factory-400 mb-3">
-              <span>{pack.gradeLevel}</span>
-              <span aria-hidden="true">·</span>
-              <span>⏱ ~{pack.estimatedPlayTimeMinutes} min</span>
-              <span aria-hidden="true">·</span>
-              <span>{pack.items.length} items</span>
-            </div>
-
-            <p class="text-slate-400 text-xs leading-relaxed mb-4 line-clamp-2">
-              {pack.seoGuideContent.overview.slice(0, 120)}…
-            </p>
-
-            <a
-              href={`/play/${pack.slug}`}
-              class="inline-flex items-center gap-2 text-sm font-semibold
-                     text-arcade-cyan hover:text-white transition-colors"
-              aria-label={`Play ${pack.h1Heading}`}
+        {packs.map((pack) => {
+          const sTheme = subjectStrips[pack.subjectCategory] || { bar: 'bg-sky-500', icon: '🎮' };
+          return (
+            <article
+              class="pack-card bg-white border-3 border-slate-200 rounded-3xl overflow-hidden
+                     shadow-toy-md hover:-translate-y-1 hover:shadow-toy-lg transition-all duration-150 flex flex-col group"
+              data-subject={pack.subjectCategory}
+              role="listitem"
             >
-              Play Now →
-            </a>
-          </article>
-        ))}
+              <!-- Bright Subject Color Bar Strip -->
+              <div class={`h-3 w-full ${sTheme.bar}`}></div>
+
+              <div class="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <!-- Category Pills -->
+                  <div class="flex flex-wrap gap-1.5 mb-3" aria-hidden="true">
+                    {pack.bins.map(bin => (
+                      <span
+                        class={`text-xs px-2.5 py-1 rounded-xl font-black ${bin.colorTheme.pillBg} shadow-sm`}
+                      >
+                        {bin.icon} {bin.label}
+                      </span>
+                    ))}
+                  </div>
+
+                  <h3 class="text-xl font-black text-slate-900 mb-2 leading-snug group-hover:text-sky-600 transition-colors font-display">
+                    {pack.h1Heading}
+                  </h3>
+
+                  <div class="flex items-center gap-2 text-xs font-bold text-slate-500 mb-3 flex-wrap">
+                    <span class="bg-slate-100 px-2.5 py-1 rounded-lg">🎓 {pack.gradeLevel}</span>
+                    <span class="bg-slate-100 px-2.5 py-1 rounded-lg">⏱️ ~{pack.estimatedPlayTimeMinutes} min</span>
+                    <span class="bg-slate-100 px-2.5 py-1 rounded-lg">📦 {pack.items.length} items</span>
+                  </div>
+
+                  <p class="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed mb-5 line-clamp-2">
+                    {pack.seoGuideContent.overview}
+                  </p>
+                </div>
+
+                <!-- 3D Tactile Play Button -->
+                <a
+                  href={`/play/${pack.slug}`}
+                  class="btn-3d w-full py-3.5 rounded-2xl bg-sky-500 hover:bg-sky-400 text-white font-black text-center text-base
+                         border-b-4 border-sky-700 shadow-toy-sm active:translate-y-1 active:border-b-0 transition-all flex items-center justify-center gap-2"
+                  aria-label={`Play ${pack.h1Heading}`}
+                >
+                  <span>Play Game</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          );
+        })}
       </div>
 
       <!-- Bottom ad -->
@@ -200,28 +240,43 @@ const subjects = [...new Set(packs.map(p => p.subjectCategory))];
         <AdSlot variant="rectangle" id="home-bottom-mobile" />
       </div>
 
-      <!-- Below-fold SEO copy -->
-      <section class="mt-14 prose prose-invert prose-sm max-w-none" aria-labelledby="about-heading">
-        <h2 id="about-heading" class="text-xl font-bold text-white mb-3">About The Conveyor Belt Sorter</h2>
-        <p class="text-slate-400 text-sm leading-relaxed mb-3">
-          FlowCatch's Conveyor Belt Sorter is a free, curriculum-aligned educational game platform that makes classifying academic concepts fast, engaging, and memorable. Students drag word crates, substance crates, and formula crates along an animated factory conveyor belt into the correct category bin — before they reach the incinerator.
+      <!-- Playful White Curriculum Standards Guide Box -->
+      <section class="mt-14 bg-white border-3 border-slate-200 rounded-3xl p-6 sm:p-8 shadow-toy-md" aria-labelledby="about-heading">
+        <div class="flex items-center gap-2.5 mb-3">
+          <span class="text-2xl" aria-hidden="true">📚</span>
+          <h2 id="about-heading" class="text-2xl font-black text-slate-900 font-display">About The Conveyor Belt Sorter</h2>
+        </div>
+        <p class="text-slate-600 text-sm font-medium leading-relaxed mb-4">
+          FlowCatch's Conveyor Belt Sorter is an engaging, curriculum-aligned educational game platform that makes classifying academic concepts fast, visual, and memorable. Students drag word crates, substance crates, and formula crates along an animated factory conveyor belt into the correct category bin — before they reach the furnace!
         </p>
-        <p class="text-slate-400 text-sm leading-relaxed mb-3">
-          Each subject pack includes 25+ items with micro-explanations on every sort, three progressive difficulty waves, and a full Teacher &amp; Student Curriculum Guide below each game. Games run directly in the browser with no downloads, no logins, and no installs — compatible with Chromebooks, tablets, and desktops.
+        <p class="text-slate-600 text-sm font-medium leading-relaxed mb-5">
+          Each subject pack includes 25+ items with micro-explanations on every sort, three progressive difficulty waves, and a full Teacher &amp; Student Curriculum Guide below each game.
         </p>
-        <h3 class="text-base font-semibold text-white mt-6 mb-2">Curriculum Standards Covered</h3>
-        <ul class="text-slate-400 text-sm space-y-1 list-disc list-inside">
-          <li>CCSS.ELA-LITERACY.L.3.1 — Parts of Speech (Nouns, Verbs, Adjectives)</li>
-          <li>NGSS PS1.A — Structure and Properties of Matter (Solids, Liquids, Gases)</li>
-          <li>NCSS Theme VI — Power, Authority, and Governance (Democracy, Monarchy, Dictatorship)</li>
-          <li>NGSS PS1.B — Chemical Reactions (Acids, Bases, and Neutral Salts)</li>
-        </ul>
+        <h3 class="text-base font-black text-slate-900 mb-2 font-display">Curriculum Standards Covered</h3>
+        <div class="grid sm:grid-cols-2 gap-3 text-xs font-bold text-slate-700">
+          <div class="bg-orange-50 border-2 border-orange-200 rounded-2xl p-3 flex items-center gap-2">
+            <span class="text-lg">📝</span>
+            <span>CCSS.ELA-LITERACY.L.3.1 — Nouns, Verbs, Adjectives</span>
+          </div>
+          <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-3 flex items-center gap-2">
+            <span class="text-lg">🧪</span>
+            <span>NGSS PS1.A — Solids, Liquids, Gases</span>
+          </div>
+          <div class="bg-purple-50 border-2 border-purple-200 rounded-2xl p-3 flex items-center gap-2">
+            <span class="text-lg">🏛️</span>
+            <span>NCSS Theme VI — Power, Authority, Governance</span>
+          </div>
+          <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-3 flex items-center gap-2">
+            <span class="text-lg">⚗️</span>
+            <span>NGSS PS1.B — Acids, Bases, Neutral Salts</span>
+          </div>
+        </div>
       </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-factory-900 border-t border-factory-800 mt-16 py-8 px-4 text-center text-factory-500 text-xs">
-      <p>&copy; {new Date().getFullYear()} FlowCatch — Free Educational Games</p>
+    <footer class="bg-white border-t-4 border-slate-200 mt-20 py-8 px-4 text-center text-slate-500 text-xs font-semibold">
+      <p>&copy; {new Date().getFullYear()} FlowCatch — Free Educational Games for Classrooms</p>
     </footer>
 
     <!-- Subject filter JS -->
@@ -234,13 +289,13 @@ const subjects = [...new Set(packs.map(p => p.subjectCategory))];
           const filter = btn.dataset.filter!;
 
           filterBtns.forEach(b => {
-            b.classList.remove('active', 'bg-arcade-cyan', 'text-factory-950', 'border-arcade-cyan', 'font-semibold');
-            b.classList.add('bg-factory-800', 'text-slate-300', 'border-factory-700');
+            b.classList.remove('active', 'bg-sky-500', 'text-white', 'border-sky-700', 'border-b-4');
+            b.classList.add('bg-white', 'text-slate-700', 'border-2', 'border-slate-200', 'border-b-4', 'border-slate-300');
             b.setAttribute('aria-pressed', 'false');
           });
 
-          btn.classList.add('active', 'bg-arcade-cyan', 'text-factory-950', 'border-arcade-cyan', 'font-semibold');
-          btn.classList.remove('bg-factory-800', 'text-slate-300', 'border-factory-700');
+          btn.classList.add('active', 'bg-sky-500', 'text-white', 'border-sky-700', 'border-b-4');
+          btn.classList.remove('bg-white', 'text-slate-700', 'border-slate-200', 'border-slate-300');
           btn.setAttribute('aria-pressed', 'true');
 
           cards.forEach((card) => {
