@@ -13,12 +13,12 @@
         "id": "noun",
         "label": "Noun",
         "colorTheme": {
-          "bg": "bg-blue-900/60",
-          "border": "border-blue-400",
-          "text": "text-blue-300",
-          "accent": "#60a5fa",
-          "glow": "0 0 20px rgba(96,165,250,0.5)",
-          "pillBg": "bg-blue-800"
+          "bg": "bg-sky-100",
+          "border": "border-sky-500",
+          "text": "text-sky-950",
+          "accent": "#0ea5e9",
+          "glow": "0 5px 0 #0284c7",
+          "pillBg": "bg-sky-500 text-white"
         },
         "icon": "🏷️",
         "shortRuleHint": "A person, place, thing, or idea"
@@ -27,12 +27,12 @@
         "id": "verb",
         "label": "Verb",
         "colorTheme": {
-          "bg": "bg-green-900/60",
-          "border": "border-green-400",
-          "text": "text-green-300",
-          "accent": "#4ade80",
-          "glow": "0 0 20px rgba(74,222,128,0.5)",
-          "pillBg": "bg-green-800"
+          "bg": "bg-emerald-100",
+          "border": "border-emerald-500",
+          "text": "text-emerald-950",
+          "accent": "#10b981",
+          "glow": "0 5px 0 #059669",
+          "pillBg": "bg-emerald-500 text-white"
         },
         "icon": "⚡",
         "shortRuleHint": "An action, state, or occurrence"
@@ -41,45 +41,207 @@
         "id": "adjective",
         "label": "Adjective",
         "colorTheme": {
-          "bg": "bg-purple-900/60",
-          "border": "border-purple-400",
-          "text": "text-purple-300",
-          "accent": "#c084fc",
-          "glow": "0 0 20px rgba(192,132,252,0.5)",
-          "pillBg": "bg-purple-800"
+          "bg": "bg-pink-100",
+          "border": "border-pink-500",
+          "text": "text-pink-950",
+          "accent": "#ec4899",
+          "glow": "0 5px 0 #db2777",
+          "pillBg": "bg-pink-500 text-white"
         },
         "icon": "🎨",
         "shortRuleHint": "Describes or modifies a noun"
       }
     ],
     "items": [
-      { "id": "eng-01", "label": "Mountain", "icon": "⛰️", "correctBinId": "noun", "explanation": "'Mountain' is a noun — it names a specific type of landform (a place/thing)." },
-      { "id": "eng-02", "label": "Running", "icon": "🏃", "correctBinId": "verb", "explanation": "'Running' is a verb — it describes the action of moving quickly on foot." },
-      { "id": "eng-03", "label": "Brilliant", "icon": "✨", "correctBinId": "adjective", "explanation": "'Brilliant' is an adjective — it describes how smart or bright something is." },
-      { "id": "eng-04", "label": "Teacher", "icon": "👩‍🏫", "correctBinId": "noun", "explanation": "'Teacher' is a noun — it names a person who instructs others." },
-      { "id": "eng-05", "label": "Whispers", "icon": "🤫", "correctBinId": "verb", "explanation": "'Whispers' is a verb — it describes the action of speaking very softly." },
-      { "id": "eng-06", "label": "Enormous", "icon": "🐘", "correctBinId": "adjective", "explanation": "'Enormous' is an adjective — it describes something of very great size." },
-      { "id": "eng-07", "label": "Library", "icon": "📚", "correctBinId": "noun", "explanation": "'Library' is a noun — it names a place where books and resources are kept." },
-      { "id": "eng-08", "label": "Laughs", "icon": "😂", "correctBinId": "verb", "explanation": "'Laughs' is a verb — it describes the physical action of laughing." },
-      { "id": "eng-09", "label": "Tiny", "icon": "🐜", "correctBinId": "adjective", "explanation": "'Tiny' is an adjective — it describes something very small in size." },
-      { "id": "eng-10", "label": "Freedom", "icon": "🕊️", "correctBinId": "noun", "explanation": "'Freedom' is an abstract noun — it names a concept or idea." },
-      { "id": "eng-11", "label": "Climbs", "icon": "🧗", "correctBinId": "verb", "explanation": "'Climbs' is a verb — it describes the action of ascending something." },
-      { "id": "eng-12", "label": "Ancient", "icon": "🏺", "correctBinId": "adjective", "explanation": "'Ancient' is an adjective — it describes something very old." },
-      { "id": "eng-13", "label": "Ocean", "icon": "🌊", "correctBinId": "noun", "explanation": "'Ocean' is a noun — it names a large body of saltwater." },
-      { "id": "eng-14", "label": "Glitters", "icon": "💎", "correctBinId": "verb", "explanation": "'Glitters' is a verb — it describes the action of shining with a sparkling light." },
-      { "id": "eng-15", "label": "Fearless", "icon": "🦁", "correctBinId": "adjective", "explanation": "'Fearless' is an adjective — it describes someone without fear." },
-      { "id": "eng-16", "label": "Justice", "icon": "⚖️", "correctBinId": "noun", "explanation": "'Justice' is an abstract noun — it names the concept of fairness." },
-      { "id": "eng-17", "label": "Trembles", "icon": "😰", "correctBinId": "verb", "explanation": "'Trembles' is a verb — it describes shaking or quivering involuntarily." },
-      { "id": "eng-18", "label": "Vibrant", "icon": "🌈", "correctBinId": "adjective", "explanation": "'Vibrant' is an adjective — it describes something full of energy and life." },
-      { "id": "eng-19", "label": "Kingdom", "icon": "🏰", "correctBinId": "noun", "explanation": "'Kingdom' is a noun — it names a territory ruled by a king or queen." },
-      { "id": "eng-20", "label": "Discovers", "icon": "🔍", "correctBinId": "verb", "explanation": "'Discovers' is a verb — it describes the action of finding something for the first time." },
-      { "id": "eng-21", "label": "Mysterious", "icon": "🔮", "correctBinId": "adjective", "explanation": "'Mysterious' is an adjective — it describes something difficult to understand or explain." },
-      { "id": "eng-22", "label": "Courage", "icon": "🦸", "correctBinId": "noun", "explanation": "'Courage' is an abstract noun — it names the quality of bravery." },
-      { "id": "eng-23", "label": "Celebrates", "icon": "🎉", "correctBinId": "verb", "explanation": "'Celebrates' is a verb — it describes the action of marking a special occasion." },
-      { "id": "eng-24", "label": "Dazzling", "icon": "🌟", "correctBinId": "adjective", "explanation": "'Dazzling' is an adjective — it describes something impressively bright or beautiful." },
-      { "id": "eng-25", "label": "Horizon", "icon": "🌅", "correctBinId": "noun", "explanation": "'Horizon' is a noun — it names the line where earth meets the sky." },
-      { "id": "eng-26", "label": "Soars", "icon": "🦅", "correctBinId": "verb", "explanation": "'Soars' is a verb — it describes flying high with little effort." },
-      { "id": "eng-27", "label": "Peculiar", "icon": "🤔", "correctBinId": "adjective", "explanation": "'Peculiar' is an adjective — it describes something strange or unusual." }
+      {
+        "id": "eng-01",
+        "label": "Mountain",
+        "icon": "⛰️",
+        "correctBinId": "noun",
+        "explanation": "'Mountain' is a noun — it names a specific type of landform (a place/thing)."
+      },
+      {
+        "id": "eng-02",
+        "label": "Running",
+        "icon": "🏃",
+        "correctBinId": "verb",
+        "explanation": "'Running' is a verb — it describes the action of moving quickly on foot."
+      },
+      {
+        "id": "eng-03",
+        "label": "Brilliant",
+        "icon": "✨",
+        "correctBinId": "adjective",
+        "explanation": "'Brilliant' is an adjective — it describes how smart or bright something is."
+      },
+      {
+        "id": "eng-04",
+        "label": "Teacher",
+        "icon": "👩‍🏫",
+        "correctBinId": "noun",
+        "explanation": "'Teacher' is a noun — it names a person who instructs others."
+      },
+      {
+        "id": "eng-05",
+        "label": "Whispers",
+        "icon": "🤫",
+        "correctBinId": "verb",
+        "explanation": "'Whispers' is a verb — it describes the action of speaking very softly."
+      },
+      {
+        "id": "eng-06",
+        "label": "Enormous",
+        "icon": "🐘",
+        "correctBinId": "adjective",
+        "explanation": "'Enormous' is an adjective — it describes something of very great size."
+      },
+      {
+        "id": "eng-07",
+        "label": "Library",
+        "icon": "📚",
+        "correctBinId": "noun",
+        "explanation": "'Library' is a noun — it names a place where books and resources are kept."
+      },
+      {
+        "id": "eng-08",
+        "label": "Laughs",
+        "icon": "😂",
+        "correctBinId": "verb",
+        "explanation": "'Laughs' is a verb — it describes the physical action of laughing."
+      },
+      {
+        "id": "eng-09",
+        "label": "Tiny",
+        "icon": "🐜",
+        "correctBinId": "adjective",
+        "explanation": "'Tiny' is an adjective — it describes something very small in size."
+      },
+      {
+        "id": "eng-10",
+        "label": "Freedom",
+        "icon": "🕊️",
+        "correctBinId": "noun",
+        "explanation": "'Freedom' is an abstract noun — it names a concept or idea."
+      },
+      {
+        "id": "eng-11",
+        "label": "Climbs",
+        "icon": "🧗",
+        "correctBinId": "verb",
+        "explanation": "'Climbs' is a verb — it describes the action of ascending something."
+      },
+      {
+        "id": "eng-12",
+        "label": "Ancient",
+        "icon": "🏺",
+        "correctBinId": "adjective",
+        "explanation": "'Ancient' is an adjective — it describes something very old."
+      },
+      {
+        "id": "eng-13",
+        "label": "Ocean",
+        "icon": "🌊",
+        "correctBinId": "noun",
+        "explanation": "'Ocean' is a noun — it names a large body of saltwater."
+      },
+      {
+        "id": "eng-14",
+        "label": "Glitters",
+        "icon": "💎",
+        "correctBinId": "verb",
+        "explanation": "'Glitters' is a verb — it describes the action of shining with a sparkling light."
+      },
+      {
+        "id": "eng-15",
+        "label": "Fearless",
+        "icon": "🦁",
+        "correctBinId": "adjective",
+        "explanation": "'Fearless' is an adjective — it describes someone without fear."
+      },
+      {
+        "id": "eng-16",
+        "label": "Justice",
+        "icon": "⚖️",
+        "correctBinId": "noun",
+        "explanation": "'Justice' is an abstract noun — it names the concept of fairness."
+      },
+      {
+        "id": "eng-17",
+        "label": "Trembles",
+        "icon": "😰",
+        "correctBinId": "verb",
+        "explanation": "'Trembles' is a verb — it describes shaking or quivering involuntarily."
+      },
+      {
+        "id": "eng-18",
+        "label": "Vibrant",
+        "icon": "🌈",
+        "correctBinId": "adjective",
+        "explanation": "'Vibrant' is an adjective — it describes something full of energy and life."
+      },
+      {
+        "id": "eng-19",
+        "label": "Kingdom",
+        "icon": "🏰",
+        "correctBinId": "noun",
+        "explanation": "'Kingdom' is a noun — it names a territory ruled by a king or queen."
+      },
+      {
+        "id": "eng-20",
+        "label": "Discovers",
+        "icon": "🔍",
+        "correctBinId": "verb",
+        "explanation": "'Discovers' is a verb — it describes the action of finding something for the first time."
+      },
+      {
+        "id": "eng-21",
+        "label": "Mysterious",
+        "icon": "🔮",
+        "correctBinId": "adjective",
+        "explanation": "'Mysterious' is an adjective — it describes something difficult to understand or explain."
+      },
+      {
+        "id": "eng-22",
+        "label": "Courage",
+        "icon": "🦸",
+        "correctBinId": "noun",
+        "explanation": "'Courage' is an abstract noun — it names the quality of bravery."
+      },
+      {
+        "id": "eng-23",
+        "label": "Celebrates",
+        "icon": "🎉",
+        "correctBinId": "verb",
+        "explanation": "'Celebrates' is a verb — it describes the action of marking a special occasion."
+      },
+      {
+        "id": "eng-24",
+        "label": "Dazzling",
+        "icon": "🌟",
+        "correctBinId": "adjective",
+        "explanation": "'Dazzling' is an adjective — it describes something impressively bright or beautiful."
+      },
+      {
+        "id": "eng-25",
+        "label": "Horizon",
+        "icon": "🌅",
+        "correctBinId": "noun",
+        "explanation": "'Horizon' is a noun — it names the line where earth meets the sky."
+      },
+      {
+        "id": "eng-26",
+        "label": "Soars",
+        "icon": "🦅",
+        "correctBinId": "verb",
+        "explanation": "'Soars' is a verb — it describes flying high with little effort."
+      },
+      {
+        "id": "eng-27",
+        "label": "Peculiar",
+        "icon": "🤔",
+        "correctBinId": "adjective",
+        "explanation": "'Peculiar' is an adjective — it describes something strange or unusual."
+      }
     ],
     "seoGuideContent": {
       "overview": "In this interactive Noun, Verb, and Adjective Sorting Game, students practice identifying the three core parts of speech by dragging word crates along a moving conveyor belt into the correct grammar bin. This game targets CCSS.ELA-LITERACY.L.3.1 and reinforces word classification skills for students in Grades 3 through 6.",
@@ -94,19 +256,37 @@
         {
           "category": "Noun",
           "criteria": "Names a person, place, thing, or idea (abstract or concrete)",
-          "examples": ["Mountain", "Teacher", "Library", "Freedom", "Justice"],
+          "examples": [
+            "Mountain",
+            "Teacher",
+            "Library",
+            "Freedom",
+            "Justice"
+          ],
           "keyIndicator": "Can follow 'the' or 'a/an'; answers 'who?' or 'what?'"
         },
         {
           "category": "Verb",
           "criteria": "Expresses an action, state of being, or occurrence",
-          "examples": ["Running", "Whispers", "Climbs", "Discovers", "Celebrates"],
+          "examples": [
+            "Running",
+            "Whispers",
+            "Climbs",
+            "Discovers",
+            "Celebrates"
+          ],
           "keyIndicator": "Can follow a subject; answers 'what does the subject do?'"
         },
         {
           "category": "Adjective",
           "criteria": "Describes or modifies a noun, giving more detail",
-          "examples": ["Brilliant", "Enormous", "Ancient", "Fearless", "Vibrant"],
+          "examples": [
+            "Brilliant",
+            "Enormous",
+            "Ancient",
+            "Fearless",
+            "Vibrant"
+          ],
           "keyIndicator": "Can precede a noun ('the ___ mountain'); answers 'what kind?'"
         }
       ],
@@ -161,12 +341,12 @@
         "id": "solid",
         "label": "Solid",
         "colorTheme": {
-          "bg": "bg-amber-900/60",
-          "border": "border-amber-400",
-          "text": "text-amber-300",
-          "accent": "#fbbf24",
-          "glow": "0 0 20px rgba(251,191,36,0.5)",
-          "pillBg": "bg-amber-800"
+          "bg": "bg-amber-100",
+          "border": "border-amber-500",
+          "text": "text-amber-950",
+          "accent": "#f59e0b",
+          "glow": "0 5px 0 #d97706",
+          "pillBg": "bg-amber-500 text-white"
         },
         "icon": "🧱",
         "shortRuleHint": "Fixed shape and volume"
@@ -175,12 +355,12 @@
         "id": "liquid",
         "label": "Liquid",
         "colorTheme": {
-          "bg": "bg-cyan-900/60",
-          "border": "border-cyan-400",
-          "text": "text-cyan-300",
-          "accent": "#22d3ee",
-          "glow": "0 0 20px rgba(34,211,238,0.5)",
-          "pillBg": "bg-cyan-800"
+          "bg": "bg-cyan-100",
+          "border": "border-cyan-500",
+          "text": "text-cyan-950",
+          "accent": "#06b6d4",
+          "glow": "0 5px 0 #0891b2",
+          "pillBg": "bg-cyan-500 text-white"
         },
         "icon": "💧",
         "shortRuleHint": "Fixed volume, takes container's shape"
@@ -189,44 +369,203 @@
         "id": "gas",
         "label": "Gas",
         "colorTheme": {
-          "bg": "bg-teal-900/60",
-          "border": "border-teal-400",
-          "text": "text-teal-300",
-          "accent": "#2dd4bf",
-          "glow": "0 0 20px rgba(45,212,191,0.5)",
-          "pillBg": "bg-teal-800"
+          "bg": "bg-teal-100",
+          "border": "border-teal-500",
+          "text": "text-teal-950",
+          "accent": "#14b8a6",
+          "glow": "0 5px 0 #0d9488",
+          "pillBg": "bg-teal-500 text-white"
         },
         "icon": "💨",
         "shortRuleHint": "No fixed shape or volume; expands to fill space"
       }
     ],
     "items": [
-      { "id": "sci-01", "label": "Ice Cube", "icon": "🧊", "correctBinId": "solid", "explanation": "An ice cube is a solid — water molecules are locked in a rigid crystal structure with a fixed shape." },
-      { "id": "sci-02", "label": "Milk", "icon": "🥛", "correctBinId": "liquid", "explanation": "Milk is a liquid — it flows, takes the shape of any container, but keeps a fixed volume." },
-      { "id": "sci-03", "label": "Oxygen", "icon": "🌬️", "correctBinId": "gas", "explanation": "Oxygen (O₂) is a gas — its molecules move freely and expand to fill any container." },
-      { "id": "sci-04", "label": "Granite", "icon": "🪨", "correctBinId": "solid", "explanation": "Granite is a solid — its mineral crystals are tightly bonded, giving it a definite shape and volume." },
-      { "id": "sci-05", "label": "Mercury", "icon": "🌡️", "correctBinId": "liquid", "explanation": "Mercury is a liquid at room temperature — it flows like water despite being a metal." },
-      { "id": "sci-06", "label": "Steam", "icon": "♨️", "correctBinId": "gas", "explanation": "Steam (water vapor) is a gas — water molecules have enough energy to break free and spread through the air." },
-      { "id": "sci-07", "label": "Wood", "icon": "🪵", "correctBinId": "solid", "explanation": "Wood is a solid — it has a rigid cell structure that gives it a definite shape and volume." },
-      { "id": "sci-08", "label": "Juice", "icon": "🧃", "correctBinId": "liquid", "explanation": "Juice is a liquid — it flows and conforms to its container while keeping the same volume." },
-      { "id": "sci-09", "label": "Helium", "icon": "🎈", "correctBinId": "gas", "explanation": "Helium is a gas — its atoms are so light and spread out that it lifts balloons." },
-      { "id": "sci-10", "label": "Diamond", "icon": "💎", "correctBinId": "solid", "explanation": "Diamond is a solid — carbon atoms in a rigid tetrahedral lattice give it extreme hardness and a fixed shape." },
-      { "id": "sci-11", "label": "Lava", "icon": "🌋", "correctBinId": "liquid", "explanation": "Lava is a liquid — molten rock flows and takes the shape of the terrain it runs across." },
-      { "id": "sci-12", "label": "Carbon Dioxide", "subLabel": "CO₂", "icon": "🫧", "correctBinId": "gas", "explanation": "Carbon dioxide is a gas — the CO₂ molecules spread freely, which is why carbonation bubbles escape a drink." },
-      { "id": "sci-13", "label": "Sand", "icon": "🏖️", "correctBinId": "solid", "explanation": "Sand grains are solids — each grain has a fixed shape. The pile looks fluid, but individual grains do not flow." },
-      { "id": "sci-14", "label": "Honey", "icon": "🍯", "correctBinId": "liquid", "explanation": "Honey is a viscous liquid — it flows very slowly but still takes the shape of its container." },
-      { "id": "sci-15", "label": "Nitrogen", "subLabel": "N₂", "icon": "💨", "correctBinId": "gas", "explanation": "Nitrogen gas makes up 78% of air. Its molecules move rapidly and fill any container." },
-      { "id": "sci-16", "label": "Copper Wire", "icon": "🔌", "correctBinId": "solid", "explanation": "Copper wire is a solid — copper atoms are arranged in a close-packed lattice, keeping a fixed shape." },
-      { "id": "sci-17", "label": "Vinegar", "icon": "🫙", "correctBinId": "liquid", "explanation": "Vinegar is a liquid — acetic acid dissolved in water flows freely and conforms to containers." },
-      { "id": "sci-18", "label": "Chlorine Gas", "subLabel": "Cl₂", "icon": "☁️", "correctBinId": "gas", "explanation": "Chlorine is a yellow-green gas at room temperature — its molecules disperse rapidly through any space." },
-      { "id": "sci-19", "label": "Bone", "icon": "🦴", "correctBinId": "solid", "explanation": "Bone is a solid composite material — calcium phosphate crystals give it a rigid, fixed structure." },
-      { "id": "sci-20", "label": "Blood", "icon": "🩸", "correctBinId": "liquid", "explanation": "Blood is a liquid — it flows through vessels, takes their shape, and keeps a constant volume." },
-      { "id": "sci-21", "label": "Smoke", "icon": "🌫️", "correctBinId": "gas", "explanation": "Smoke is a gas (with fine particles) — its molecules spread out to fill available space." },
-      { "id": "sci-22", "label": "Glass", "icon": "🪟", "correctBinId": "solid", "explanation": "Glass is an amorphous solid — its atoms lack a crystal structure but it has a fixed shape and volume." },
-      { "id": "sci-23", "label": "Motor Oil", "icon": "🛢️", "correctBinId": "liquid", "explanation": "Motor oil is a liquid — it flows to lubricate engine parts, taking the shape of whatever contains it." },
-      { "id": "sci-24", "label": "Natural Gas", "icon": "🔥", "correctBinId": "gas", "explanation": "Natural gas (mostly methane CH₄) is a gas — it fills pipelines and tanks by expanding to fill space." },
-      { "id": "sci-25", "label": "Salt Crystal", "icon": "🧂", "correctBinId": "solid", "explanation": "A salt crystal is a solid — sodium and chloride ions form a rigid ionic lattice with a fixed cubic shape." },
-      { "id": "sci-26", "label": "Gasoline", "icon": "⛽", "correctBinId": "liquid", "explanation": "Gasoline is a liquid — a mixture of hydrocarbons that flows freely at room temperature." }
+      {
+        "id": "sci-01",
+        "label": "Ice Cube",
+        "icon": "🧊",
+        "correctBinId": "solid",
+        "explanation": "An ice cube is a solid — water molecules are locked in a rigid crystal structure with a fixed shape."
+      },
+      {
+        "id": "sci-02",
+        "label": "Milk",
+        "icon": "🥛",
+        "correctBinId": "liquid",
+        "explanation": "Milk is a liquid — it flows, takes the shape of any container, but keeps a fixed volume."
+      },
+      {
+        "id": "sci-03",
+        "label": "Oxygen",
+        "icon": "🌬️",
+        "correctBinId": "gas",
+        "explanation": "Oxygen (O₂) is a gas — its molecules move freely and expand to fill any container."
+      },
+      {
+        "id": "sci-04",
+        "label": "Granite",
+        "icon": "🪨",
+        "correctBinId": "solid",
+        "explanation": "Granite is a solid — its mineral crystals are tightly bonded, giving it a definite shape and volume."
+      },
+      {
+        "id": "sci-05",
+        "label": "Mercury",
+        "icon": "🌡️",
+        "correctBinId": "liquid",
+        "explanation": "Mercury is a liquid at room temperature — it flows like water despite being a metal."
+      },
+      {
+        "id": "sci-06",
+        "label": "Steam",
+        "icon": "♨️",
+        "correctBinId": "gas",
+        "explanation": "Steam (water vapor) is a gas — water molecules have enough energy to break free and spread through the air."
+      },
+      {
+        "id": "sci-07",
+        "label": "Wood",
+        "icon": "🪵",
+        "correctBinId": "solid",
+        "explanation": "Wood is a solid — it has a rigid cell structure that gives it a definite shape and volume."
+      },
+      {
+        "id": "sci-08",
+        "label": "Juice",
+        "icon": "🧃",
+        "correctBinId": "liquid",
+        "explanation": "Juice is a liquid — it flows and conforms to its container while keeping the same volume."
+      },
+      {
+        "id": "sci-09",
+        "label": "Helium",
+        "icon": "🎈",
+        "correctBinId": "gas",
+        "explanation": "Helium is a gas — its atoms are so light and spread out that it lifts balloons."
+      },
+      {
+        "id": "sci-10",
+        "label": "Diamond",
+        "icon": "💎",
+        "correctBinId": "solid",
+        "explanation": "Diamond is a solid — carbon atoms in a rigid tetrahedral lattice give it extreme hardness and a fixed shape."
+      },
+      {
+        "id": "sci-11",
+        "label": "Lava",
+        "icon": "🌋",
+        "correctBinId": "liquid",
+        "explanation": "Lava is a liquid — molten rock flows and takes the shape of the terrain it runs across."
+      },
+      {
+        "id": "sci-12",
+        "label": "Carbon Dioxide",
+        "subLabel": "CO₂",
+        "icon": "🫧",
+        "correctBinId": "gas",
+        "explanation": "Carbon dioxide is a gas — the CO₂ molecules spread freely, which is why carbonation bubbles escape a drink."
+      },
+      {
+        "id": "sci-13",
+        "label": "Sand",
+        "icon": "🏖️",
+        "correctBinId": "solid",
+        "explanation": "Sand grains are solids — each grain has a fixed shape. The pile looks fluid, but individual grains do not flow."
+      },
+      {
+        "id": "sci-14",
+        "label": "Honey",
+        "icon": "🍯",
+        "correctBinId": "liquid",
+        "explanation": "Honey is a viscous liquid — it flows very slowly but still takes the shape of its container."
+      },
+      {
+        "id": "sci-15",
+        "label": "Nitrogen",
+        "subLabel": "N₂",
+        "icon": "💨",
+        "correctBinId": "gas",
+        "explanation": "Nitrogen gas makes up 78% of air. Its molecules move rapidly and fill any container."
+      },
+      {
+        "id": "sci-16",
+        "label": "Copper Wire",
+        "icon": "🔌",
+        "correctBinId": "solid",
+        "explanation": "Copper wire is a solid — copper atoms are arranged in a close-packed lattice, keeping a fixed shape."
+      },
+      {
+        "id": "sci-17",
+        "label": "Vinegar",
+        "icon": "🫙",
+        "correctBinId": "liquid",
+        "explanation": "Vinegar is a liquid — acetic acid dissolved in water flows freely and conforms to containers."
+      },
+      {
+        "id": "sci-18",
+        "label": "Chlorine Gas",
+        "subLabel": "Cl₂",
+        "icon": "☁️",
+        "correctBinId": "gas",
+        "explanation": "Chlorine is a yellow-green gas at room temperature — its molecules disperse rapidly through any space."
+      },
+      {
+        "id": "sci-19",
+        "label": "Bone",
+        "icon": "🦴",
+        "correctBinId": "solid",
+        "explanation": "Bone is a solid composite material — calcium phosphate crystals give it a rigid, fixed structure."
+      },
+      {
+        "id": "sci-20",
+        "label": "Blood",
+        "icon": "🩸",
+        "correctBinId": "liquid",
+        "explanation": "Blood is a liquid — it flows through vessels, takes their shape, and keeps a constant volume."
+      },
+      {
+        "id": "sci-21",
+        "label": "Smoke",
+        "icon": "🌫️",
+        "correctBinId": "gas",
+        "explanation": "Smoke is a gas (with fine particles) — its molecules spread out to fill available space."
+      },
+      {
+        "id": "sci-22",
+        "label": "Glass",
+        "icon": "🪟",
+        "correctBinId": "solid",
+        "explanation": "Glass is an amorphous solid — its atoms lack a crystal structure but it has a fixed shape and volume."
+      },
+      {
+        "id": "sci-23",
+        "label": "Motor Oil",
+        "icon": "🛢️",
+        "correctBinId": "liquid",
+        "explanation": "Motor oil is a liquid — it flows to lubricate engine parts, taking the shape of whatever contains it."
+      },
+      {
+        "id": "sci-24",
+        "label": "Natural Gas",
+        "icon": "🔥",
+        "correctBinId": "gas",
+        "explanation": "Natural gas (mostly methane CH₄) is a gas — it fills pipelines and tanks by expanding to fill space."
+      },
+      {
+        "id": "sci-25",
+        "label": "Salt Crystal",
+        "icon": "🧂",
+        "correctBinId": "solid",
+        "explanation": "A salt crystal is a solid — sodium and chloride ions form a rigid ionic lattice with a fixed cubic shape."
+      },
+      {
+        "id": "sci-26",
+        "label": "Gasoline",
+        "icon": "⛽",
+        "correctBinId": "liquid",
+        "explanation": "Gasoline is a liquid — a mixture of hydrocarbons that flows freely at room temperature."
+      }
     ],
     "seoGuideContent": {
       "overview": "This States of Matter Sorting Game challenges students to classify everyday substances as solids, liquids, or gases by sorting them on an animated conveyor belt. It targets NGSS PS1.A (Structure and Properties of Matter) for Grades 3–5 and builds intuitive understanding of particle arrangement and macroscopic properties.",
@@ -241,19 +580,37 @@
         {
           "category": "Solid",
           "criteria": "Fixed shape AND fixed volume; particles are packed tightly and vibrate in place",
-          "examples": ["Ice Cube", "Granite", "Diamond", "Wood", "Glass"],
+          "examples": [
+            "Ice Cube",
+            "Granite",
+            "Diamond",
+            "Wood",
+            "Glass"
+          ],
           "keyIndicator": "Holds its shape when placed on a table"
         },
         {
           "category": "Liquid",
           "criteria": "Fixed volume but takes the shape of its container; particles slide past each other",
-          "examples": ["Milk", "Mercury", "Lava", "Blood", "Honey"],
+          "examples": [
+            "Milk",
+            "Mercury",
+            "Lava",
+            "Blood",
+            "Honey"
+          ],
           "keyIndicator": "Pours and fills the bottom of a container"
         },
         {
           "category": "Gas",
           "criteria": "No fixed shape or volume; particles move rapidly and spread to fill any space",
-          "examples": ["Oxygen", "Steam", "Helium", "Carbon Dioxide", "Nitrogen"],
+          "examples": [
+            "Oxygen",
+            "Steam",
+            "Helium",
+            "Carbon Dioxide",
+            "Nitrogen"
+          ],
           "keyIndicator": "Escapes an open container; invisible or forms clouds"
         }
       ],
@@ -308,12 +665,12 @@
         "id": "democracy",
         "label": "Democracy",
         "colorTheme": {
-          "bg": "bg-blue-900/60",
-          "border": "border-blue-400",
-          "text": "text-blue-300",
-          "accent": "#60a5fa",
-          "glow": "0 0 20px rgba(96,165,250,0.5)",
-          "pillBg": "bg-blue-800"
+          "bg": "bg-blue-100",
+          "border": "border-blue-500",
+          "text": "text-blue-950",
+          "accent": "#3b82f6",
+          "glow": "0 5px 0 #2563eb",
+          "pillBg": "bg-blue-500 text-white"
         },
         "icon": "🗳️",
         "shortRuleHint": "Government by the people, through voting"
@@ -322,12 +679,12 @@
         "id": "monarchy",
         "label": "Monarchy",
         "colorTheme": {
-          "bg": "bg-yellow-900/60",
-          "border": "border-yellow-400",
-          "text": "text-yellow-300",
-          "accent": "#facc15",
-          "glow": "0 0 20px rgba(250,204,21,0.5)",
-          "pillBg": "bg-yellow-800"
+          "bg": "bg-amber-100",
+          "border": "border-amber-500",
+          "text": "text-amber-950",
+          "accent": "#eab308",
+          "glow": "0 5px 0 #ca8a04",
+          "pillBg": "bg-amber-500 text-slate-900"
         },
         "icon": "👑",
         "shortRuleHint": "Rule by a hereditary king or queen"
@@ -336,44 +693,201 @@
         "id": "dictatorship",
         "label": "Dictatorship",
         "colorTheme": {
-          "bg": "bg-red-900/60",
-          "border": "border-red-400",
-          "text": "text-red-300",
-          "accent": "#f87171",
-          "glow": "0 0 20px rgba(248,113,113,0.5)",
-          "pillBg": "bg-red-800"
+          "bg": "bg-rose-100",
+          "border": "border-rose-500",
+          "text": "text-rose-950",
+          "accent": "#f43f5e",
+          "glow": "0 5px 0 #e11d48",
+          "pillBg": "bg-rose-500 text-white"
         },
         "icon": "✊",
         "shortRuleHint": "Authoritarian rule by a single leader or party"
       }
     ],
     "items": [
-      { "id": "civ-01", "label": "Free Elections", "icon": "🗳️", "correctBinId": "democracy", "explanation": "Free elections where citizens vote for leaders is the defining feature of a democratic government." },
-      { "id": "civ-02", "label": "Hereditary Throne", "icon": "👑", "correctBinId": "monarchy", "explanation": "A hereditary throne — power passed from parent to child — is the defining feature of a monarchy." },
-      { "id": "civ-03", "label": "Censored Press", "icon": "🚫", "correctBinId": "dictatorship", "explanation": "State censorship of the press is a hallmark of dictatorships, where information is controlled to suppress dissent." },
-      { "id": "civ-04", "label": "Parliament", "icon": "🏛️", "correctBinId": "democracy", "explanation": "A parliament (elected legislative body) represents the people's will — a core democratic institution." },
-      { "id": "civ-05", "label": "Royal Decree", "icon": "📜", "correctBinId": "monarchy", "explanation": "A royal decree — law issued by a monarch without a vote — is characteristic of monarchical rule." },
-      { "id": "civ-06", "label": "Secret Police", "icon": "🕵️", "correctBinId": "dictatorship", "explanation": "Secret police that suppress opposition are a defining tool of authoritarian dictatorships." },
-      { "id": "civ-07", "label": "Bill of Rights", "icon": "📋", "correctBinId": "democracy", "explanation": "A Bill of Rights that protects individual freedoms is central to modern constitutional democracies." },
-      { "id": "civ-08", "label": "Queen Elizabeth II", "icon": "👸", "correctBinId": "monarchy", "explanation": "Queen Elizabeth II was the hereditary monarch of the United Kingdom, the world's oldest constitutional monarchy." },
-      { "id": "civ-09", "label": "North Korea", "icon": "🇰🇵", "correctBinId": "dictatorship", "explanation": "North Korea is ruled by Kim Jong-un with unchecked personal power — a textbook example of a modern dictatorship." },
-      { "id": "civ-10", "label": "Constitution", "icon": "📖", "correctBinId": "democracy", "explanation": "A written constitution that limits government power and protects rights is foundational to democratic systems." },
-      { "id": "civ-11", "label": "King of Saudi Arabia", "icon": "🤴", "correctBinId": "monarchy", "explanation": "Saudi Arabia is an absolute monarchy — the king holds supreme authority, combining religious and state power." },
-      { "id": "civ-12", "label": "Propaganda Posters", "icon": "📢", "correctBinId": "dictatorship", "explanation": "State propaganda to control public opinion and glorify the leader is a classic feature of dictatorships." },
-      { "id": "civ-13", "label": "Right to Vote", "icon": "☑️", "correctBinId": "democracy", "explanation": "Universal suffrage — the right of all citizens to vote — is the foundation of democratic participation." },
-      { "id": "civ-14", "label": "Imperial Japan", "subLabel": "Pre-1945", "icon": "🏯", "correctBinId": "monarchy", "explanation": "Pre-war Japan was an empire under Emperor Hirohito — the emperor held divine and political authority." },
-      { "id": "civ-15", "label": "Banned Opposition", "icon": "🚷", "correctBinId": "dictatorship", "explanation": "Banning political opposition parties is a defining feature of dictatorships; it eliminates democratic competition." },
-      { "id": "civ-16", "label": "Freedom of Speech", "icon": "🗣️", "correctBinId": "democracy", "explanation": "Constitutionally protected freedom of speech allows citizens to criticize government — essential to democracy." },
-      { "id": "civ-17", "label": "Buckingham Palace", "icon": "🏰", "correctBinId": "monarchy", "explanation": "Buckingham Palace is the official residence of the British monarch — a global symbol of constitutional monarchy." },
-      { "id": "civ-18", "label": "Adolf Hitler", "icon": "⚠️", "correctBinId": "dictatorship", "explanation": "Adolf Hitler's Nazi Germany is one of history's most studied dictatorships — totalitarian rule with no free elections." },
-      { "id": "civ-19", "label": "Jury of Peers", "icon": "👥", "correctBinId": "democracy", "explanation": "Trial by a jury of citizens reflects the democratic principle that the people — not just the state — decide justice." },
-      { "id": "civ-20", "label": "Sultan of Oman", "icon": "🌙", "correctBinId": "monarchy", "explanation": "Oman is an absolute sultanate — the Sultan holds supreme executive, legislative, and judicial authority." },
-      { "id": "civ-21", "label": "Joseph Stalin", "icon": "⛔", "correctBinId": "dictatorship", "explanation": "Joseph Stalin ruled the Soviet Union as a totalitarian dictator, using purges and gulags to eliminate opposition." },
-      { "id": "civ-22", "label": "Separation of Powers", "icon": "⚖️", "correctBinId": "democracy", "explanation": "Dividing government into executive, legislative, and judicial branches prevents any one person from seizing all power — a democratic safeguard." },
-      { "id": "civ-23", "label": "Coronation Ceremony", "icon": "💍", "correctBinId": "monarchy", "explanation": "A coronation ceremony formally marks the beginning of a monarch's reign — unique to monarchical systems." },
-      { "id": "civ-24", "label": "Forced Labor Camps", "icon": "⛏️", "correctBinId": "dictatorship", "explanation": "Forced labor camps (gulags, re-education camps) are tools of authoritarian control unique to dictatorial regimes." },
-      { "id": "civ-25", "label": "Referendum Vote", "icon": "🗳️", "correctBinId": "democracy", "explanation": "A referendum lets citizens vote directly on a specific law or policy — a form of direct democratic participation." },
-      { "id": "civ-26", "label": "Absolute Monarchy", "icon": "🔱", "correctBinId": "monarchy", "explanation": "An absolute monarchy is one where the monarch has unlimited power with no constitutional constraints." }
+      {
+        "id": "civ-01",
+        "label": "Free Elections",
+        "icon": "🗳️",
+        "correctBinId": "democracy",
+        "explanation": "Free elections where citizens vote for leaders is the defining feature of a democratic government."
+      },
+      {
+        "id": "civ-02",
+        "label": "Hereditary Throne",
+        "icon": "👑",
+        "correctBinId": "monarchy",
+        "explanation": "A hereditary throne — power passed from parent to child — is the defining feature of a monarchy."
+      },
+      {
+        "id": "civ-03",
+        "label": "Censored Press",
+        "icon": "🚫",
+        "correctBinId": "dictatorship",
+        "explanation": "State censorship of the press is a hallmark of dictatorships, where information is controlled to suppress dissent."
+      },
+      {
+        "id": "civ-04",
+        "label": "Parliament",
+        "icon": "🏛️",
+        "correctBinId": "democracy",
+        "explanation": "A parliament (elected legislative body) represents the people's will — a core democratic institution."
+      },
+      {
+        "id": "civ-05",
+        "label": "Royal Decree",
+        "icon": "📜",
+        "correctBinId": "monarchy",
+        "explanation": "A royal decree — law issued by a monarch without a vote — is characteristic of monarchical rule."
+      },
+      {
+        "id": "civ-06",
+        "label": "Secret Police",
+        "icon": "🕵️",
+        "correctBinId": "dictatorship",
+        "explanation": "Secret police that suppress opposition are a defining tool of authoritarian dictatorships."
+      },
+      {
+        "id": "civ-07",
+        "label": "Bill of Rights",
+        "icon": "📋",
+        "correctBinId": "democracy",
+        "explanation": "A Bill of Rights that protects individual freedoms is central to modern constitutional democracies."
+      },
+      {
+        "id": "civ-08",
+        "label": "Queen Elizabeth II",
+        "icon": "👸",
+        "correctBinId": "monarchy",
+        "explanation": "Queen Elizabeth II was the hereditary monarch of the United Kingdom, the world's oldest constitutional monarchy."
+      },
+      {
+        "id": "civ-09",
+        "label": "North Korea",
+        "icon": "🇰🇵",
+        "correctBinId": "dictatorship",
+        "explanation": "North Korea is ruled by Kim Jong-un with unchecked personal power — a textbook example of a modern dictatorship."
+      },
+      {
+        "id": "civ-10",
+        "label": "Constitution",
+        "icon": "📖",
+        "correctBinId": "democracy",
+        "explanation": "A written constitution that limits government power and protects rights is foundational to democratic systems."
+      },
+      {
+        "id": "civ-11",
+        "label": "King of Saudi Arabia",
+        "icon": "🤴",
+        "correctBinId": "monarchy",
+        "explanation": "Saudi Arabia is an absolute monarchy — the king holds supreme authority, combining religious and state power."
+      },
+      {
+        "id": "civ-12",
+        "label": "Propaganda Posters",
+        "icon": "📢",
+        "correctBinId": "dictatorship",
+        "explanation": "State propaganda to control public opinion and glorify the leader is a classic feature of dictatorships."
+      },
+      {
+        "id": "civ-13",
+        "label": "Right to Vote",
+        "icon": "☑️",
+        "correctBinId": "democracy",
+        "explanation": "Universal suffrage — the right of all citizens to vote — is the foundation of democratic participation."
+      },
+      {
+        "id": "civ-14",
+        "label": "Imperial Japan",
+        "subLabel": "Pre-1945",
+        "icon": "🏯",
+        "correctBinId": "monarchy",
+        "explanation": "Pre-war Japan was an empire under Emperor Hirohito — the emperor held divine and political authority."
+      },
+      {
+        "id": "civ-15",
+        "label": "Banned Opposition",
+        "icon": "🚷",
+        "correctBinId": "dictatorship",
+        "explanation": "Banning political opposition parties is a defining feature of dictatorships; it eliminates democratic competition."
+      },
+      {
+        "id": "civ-16",
+        "label": "Freedom of Speech",
+        "icon": "🗣️",
+        "correctBinId": "democracy",
+        "explanation": "Constitutionally protected freedom of speech allows citizens to criticize government — essential to democracy."
+      },
+      {
+        "id": "civ-17",
+        "label": "Buckingham Palace",
+        "icon": "🏰",
+        "correctBinId": "monarchy",
+        "explanation": "Buckingham Palace is the official residence of the British monarch — a global symbol of constitutional monarchy."
+      },
+      {
+        "id": "civ-18",
+        "label": "Adolf Hitler",
+        "icon": "⚠️",
+        "correctBinId": "dictatorship",
+        "explanation": "Adolf Hitler's Nazi Germany is one of history's most studied dictatorships — totalitarian rule with no free elections."
+      },
+      {
+        "id": "civ-19",
+        "label": "Jury of Peers",
+        "icon": "👥",
+        "correctBinId": "democracy",
+        "explanation": "Trial by a jury of citizens reflects the democratic principle that the people — not just the state — decide justice."
+      },
+      {
+        "id": "civ-20",
+        "label": "Sultan of Oman",
+        "icon": "🌙",
+        "correctBinId": "monarchy",
+        "explanation": "Oman is an absolute sultanate — the Sultan holds supreme executive, legislative, and judicial authority."
+      },
+      {
+        "id": "civ-21",
+        "label": "Joseph Stalin",
+        "icon": "⛔",
+        "correctBinId": "dictatorship",
+        "explanation": "Joseph Stalin ruled the Soviet Union as a totalitarian dictator, using purges and gulags to eliminate opposition."
+      },
+      {
+        "id": "civ-22",
+        "label": "Separation of Powers",
+        "icon": "⚖️",
+        "correctBinId": "democracy",
+        "explanation": "Dividing government into executive, legislative, and judicial branches prevents any one person from seizing all power — a democratic safeguard."
+      },
+      {
+        "id": "civ-23",
+        "label": "Coronation Ceremony",
+        "icon": "💍",
+        "correctBinId": "monarchy",
+        "explanation": "A coronation ceremony formally marks the beginning of a monarch's reign — unique to monarchical systems."
+      },
+      {
+        "id": "civ-24",
+        "label": "Forced Labor Camps",
+        "icon": "⛏️",
+        "correctBinId": "dictatorship",
+        "explanation": "Forced labor camps (gulags, re-education camps) are tools of authoritarian control unique to dictatorial regimes."
+      },
+      {
+        "id": "civ-25",
+        "label": "Referendum Vote",
+        "icon": "🗳️",
+        "correctBinId": "democracy",
+        "explanation": "A referendum lets citizens vote directly on a specific law or policy — a form of direct democratic participation."
+      },
+      {
+        "id": "civ-26",
+        "label": "Absolute Monarchy",
+        "icon": "🔱",
+        "correctBinId": "monarchy",
+        "explanation": "An absolute monarchy is one where the monarch has unlimited power with no constitutional constraints."
+      }
     ],
     "seoGuideContent": {
       "overview": "This Government Systems Sorting Game teaches students to classify real-world political examples, features, and historical figures into democracy, monarchy, or dictatorship. Aligned with NCSS Theme VI: Power, Authority, and Governance, this game is designed for Grades 6–9 Social Studies and builds comparative government literacy through active classification.",
@@ -388,19 +902,35 @@
         {
           "category": "Democracy",
           "criteria": "Power held by the people; leaders chosen through free elections; rights protected by law",
-          "examples": ["Free Elections", "Parliament", "Bill of Rights", "Constitution", "Freedom of Speech"],
+          "examples": [
+            "Free Elections",
+            "Parliament",
+            "Bill of Rights",
+            "Constitution",
+            "Freedom of Speech"
+          ],
           "keyIndicator": "Citizens vote; opposition parties are legal; press is free"
         },
         {
           "category": "Monarchy",
           "criteria": "Power held by a hereditary king, queen, emperor, or sultan; rule passed by bloodline",
-          "examples": ["Hereditary Throne", "Royal Decree", "Queen Elizabeth II", "King of Saudi Arabia"],
+          "examples": [
+            "Hereditary Throne",
+            "Royal Decree",
+            "Queen Elizabeth II",
+            "King of Saudi Arabia"
+          ],
           "keyIndicator": "Leader inherits power; title is King/Queen/Emperor/Sultan"
         },
         {
           "category": "Dictatorship",
           "criteria": "Power concentrated in one person or party; no free elections; suppression of opposition",
-          "examples": ["Censored Press", "Secret Police", "North Korea", "Joseph Stalin"],
+          "examples": [
+            "Censored Press",
+            "Secret Police",
+            "North Korea",
+            "Joseph Stalin"
+          ],
           "keyIndicator": "Opposition is banned or jailed; media is state-controlled; power is seized, not inherited"
         }
       ],
@@ -455,12 +985,12 @@
         "id": "acid",
         "label": "Acid",
         "colorTheme": {
-          "bg": "bg-red-900/60",
-          "border": "border-red-400",
-          "text": "text-red-300",
-          "accent": "#f87171",
-          "glow": "0 0 20px rgba(248,113,113,0.5)",
-          "pillBg": "bg-red-800"
+          "bg": "bg-rose-100",
+          "border": "border-rose-500",
+          "text": "text-rose-950",
+          "accent": "#ef4444",
+          "glow": "0 5px 0 #dc2626",
+          "pillBg": "bg-rose-500 text-white"
         },
         "icon": "🧪",
         "shortRuleHint": "pH < 7 — donates H⁺ ions"
@@ -469,12 +999,12 @@
         "id": "base",
         "label": "Base",
         "colorTheme": {
-          "bg": "bg-blue-900/60",
-          "border": "border-blue-400",
-          "text": "text-blue-300",
-          "accent": "#60a5fa",
-          "glow": "0 0 20px rgba(96,165,250,0.5)",
-          "pillBg": "bg-blue-800"
+          "bg": "bg-indigo-100",
+          "border": "border-indigo-500",
+          "text": "text-indigo-950",
+          "accent": "#6366f1",
+          "glow": "0 5px 0 #4f46e5",
+          "pillBg": "bg-indigo-500 text-white"
         },
         "icon": "⚗️",
         "shortRuleHint": "pH > 7 — accepts H⁺ or donates OH⁻"
@@ -483,44 +1013,226 @@
         "id": "neutral_salt",
         "label": "Neutral Salt",
         "colorTheme": {
-          "bg": "bg-green-900/60",
-          "border": "border-green-400",
-          "text": "text-green-300",
-          "accent": "#4ade80",
-          "glow": "0 0 20px rgba(74,222,128,0.5)",
-          "pillBg": "bg-green-800"
+          "bg": "bg-emerald-100",
+          "border": "border-emerald-500",
+          "text": "text-emerald-950",
+          "accent": "#10b981",
+          "glow": "0 5px 0 #059669",
+          "pillBg": "bg-emerald-500 text-white"
         },
         "icon": "🧂",
         "shortRuleHint": "pH ≈ 7 — ionic compound from acid+base"
       }
     ],
     "items": [
-      { "id": "chem-01", "label": "Hydrochloric Acid", "subLabel": "HCl", "icon": "🧪", "correctBinId": "acid", "explanation": "HCl (hydrochloric acid) is a strong acid — it fully dissociates in water to release H⁺ ions, giving pH ≈ 0–1." },
-      { "id": "chem-02", "label": "Sodium Hydroxide", "subLabel": "NaOH", "icon": "⚗️", "correctBinId": "base", "explanation": "NaOH (sodium hydroxide/lye) is a strong base — it releases OH⁻ ions when dissolved, giving pH ≈ 13–14." },
-      { "id": "chem-03", "label": "Sodium Chloride", "subLabel": "NaCl", "icon": "🧂", "correctBinId": "neutral_salt", "explanation": "NaCl (table salt) is a neutral salt — formed from HCl + NaOH, it dissolves to give pH ≈ 7 with no excess H⁺ or OH⁻." },
-      { "id": "chem-04", "label": "Sulfuric Acid", "subLabel": "H₂SO₄", "icon": "☠️", "correctBinId": "acid", "explanation": "H₂SO₄ (sulfuric acid) is a diprotic strong acid — releases 2 H⁺ ions per molecule, highly corrosive." },
-      { "id": "chem-05", "label": "Ammonia", "subLabel": "NH₃", "icon": "💨", "correctBinId": "base", "explanation": "NH₃ (ammonia) is a weak base — it accepts H⁺ from water forming NH₄⁺ + OH⁻, giving pH ≈ 11." },
-      { "id": "chem-06", "label": "Calcium Carbonate", "subLabel": "CaCO₃", "icon": "🪨", "correctBinId": "neutral_salt", "explanation": "CaCO₃ (chalk/limestone) is a salt of carbonic acid and calcium hydroxide — slightly basic but classified as a salt." },
-      { "id": "chem-07", "label": "Nitric Acid", "subLabel": "HNO₃", "icon": "⚡", "correctBinId": "acid", "explanation": "HNO₃ (nitric acid) is a strong oxidizing acid used in fertilizers and explosives. pH ≈ 0–2." },
-      { "id": "chem-08", "label": "Potassium Hydroxide", "subLabel": "KOH", "icon": "🧴", "correctBinId": "base", "explanation": "KOH (potassium hydroxide) is a strong base used in soap-making — releases OH⁻ ions, pH ≈ 13–14." },
-      { "id": "chem-09", "label": "Potassium Nitrate", "subLabel": "KNO₃", "icon": "🧂", "correctBinId": "neutral_salt", "explanation": "KNO₃ (potassium nitrate/saltpeter) is a neutral salt used in fertilizers and food preservation." },
-      { "id": "chem-10", "label": "Acetic Acid", "subLabel": "CH₃COOH", "icon": "🍶", "correctBinId": "acid", "explanation": "CH₃COOH (acetic acid) is the weak acid in vinegar — partially dissociates to give pH ≈ 2.4 at 5% concentration." },
-      { "id": "chem-11", "label": "Calcium Hydroxide", "subLabel": "Ca(OH)₂", "icon": "🪣", "correctBinId": "base", "explanation": "Ca(OH)₂ (lime/slaked lime) is a moderately strong base used in construction and water treatment. pH ≈ 12." },
-      { "id": "chem-12", "label": "Magnesium Sulfate", "subLabel": "MgSO₄", "icon": "🛁", "correctBinId": "neutral_salt", "explanation": "MgSO₄ (Epsom salt) is a neutral salt used in medicine and bath products — dissolves in water near pH 7." },
-      { "id": "chem-13", "label": "Phosphoric Acid", "subLabel": "H₃PO₄", "icon": "🥤", "correctBinId": "acid", "explanation": "H₃PO₄ (phosphoric acid) is the weak acid in cola drinks — gives them tartness at pH ≈ 2.4." },
-      { "id": "chem-14", "label": "Sodium Bicarbonate", "subLabel": "NaHCO₃", "icon": "🍪", "correctBinId": "base", "explanation": "NaHCO₃ (baking soda) is mildly basic — dissolves to release HCO₃⁻ which acts as a weak base, pH ≈ 8.3." },
-      { "id": "chem-15", "label": "Sodium Sulfate", "subLabel": "Na₂SO₄", "icon": "🧂", "correctBinId": "neutral_salt", "explanation": "Na₂SO₄ (sodium sulfate/Glauber's salt) is a neutral salt formed from H₂SO₄ + 2NaOH, pH ≈ 7." },
-      { "id": "chem-16", "label": "Citric Acid", "subLabel": "C₆H₈O₇", "icon": "🍋", "correctBinId": "acid", "explanation": "Citric acid is the triprotic weak acid found in citrus fruits — gives lemons and oranges their sour taste, pH ≈ 2.2." },
-      { "id": "chem-17", "label": "Magnesium Hydroxide", "subLabel": "Mg(OH)₂", "icon": "💊", "correctBinId": "base", "explanation": "Mg(OH)₂ (milk of magnesia) is a mild base used as an antacid — neutralizes stomach acid, pH ≈ 10.5." },
-      { "id": "chem-18", "label": "Copper Sulfate", "subLabel": "CuSO₄", "icon": "🟦", "correctBinId": "neutral_salt", "explanation": "CuSO₄ (copper sulfate) is a salt used in agriculture and electroplating — dissolves to a slightly acidic solution." },
-      { "id": "chem-19", "label": "Carbonic Acid", "subLabel": "H₂CO₃", "icon": "🫧", "correctBinId": "acid", "explanation": "H₂CO₃ (carbonic acid) forms when CO₂ dissolves in water — makes fizzy drinks slightly acidic at pH ≈ 3.7." },
-      { "id": "chem-20", "label": "Sodium Carbonate", "subLabel": "Na₂CO₃", "icon": "🧼", "correctBinId": "base", "explanation": "Na₂CO₃ (washing soda) is a strong base used in cleaning products — dissolves to pH ≈ 11.6." },
-      { "id": "chem-21", "label": "Ammonium Chloride", "subLabel": "NH₄Cl", "icon": "🧂", "correctBinId": "neutral_salt", "explanation": "NH₄Cl is a salt formed from NH₃ + HCl — dissolves to a mildly acidic solution (pH ≈ 4.6), but is classified as a salt." },
-      { "id": "chem-22", "label": "Hydrofluoric Acid", "subLabel": "HF", "icon": "⚠️", "correctBinId": "acid", "explanation": "HF (hydrofluoric acid) is a weak acid but extremely dangerous — used in glass etching, pH ≈ 3.2 at 1% concentration." },
-      { "id": "chem-23", "label": "Barium Hydroxide", "subLabel": "Ba(OH)₂", "icon": "⚗️", "correctBinId": "base", "explanation": "Ba(OH)₂ (barium hydroxide) is a strong base — used in analytical chemistry, gives pH ≈ 13 in solution." },
-      { "id": "chem-24", "label": "Iron(III) Chloride", "subLabel": "FeCl₃", "icon": "🦀", "correctBinId": "neutral_salt", "explanation": "FeCl₃ (iron trichloride) is a salt used in water treatment and electronics etching." },
-      { "id": "chem-25", "label": "Lactic Acid", "subLabel": "C₃H₆O₃", "icon": "🏃", "correctBinId": "acid", "explanation": "Lactic acid is the weak acid produced in muscles during anaerobic exercise — also gives yogurt its sour taste." },
-      { "id": "chem-26", "label": "Lithium Hydroxide", "subLabel": "LiOH", "icon": "🔋", "correctBinId": "base", "explanation": "LiOH (lithium hydroxide) is a strong base used in lithium batteries and CO₂ scrubbers on spacecraft." }
+      {
+        "id": "chem-01",
+        "label": "Hydrochloric Acid",
+        "subLabel": "HCl",
+        "icon": "🧪",
+        "correctBinId": "acid",
+        "explanation": "HCl (hydrochloric acid) is a strong acid — it fully dissociates in water to release H⁺ ions, giving pH ≈ 0–1."
+      },
+      {
+        "id": "chem-02",
+        "label": "Sodium Hydroxide",
+        "subLabel": "NaOH",
+        "icon": "⚗️",
+        "correctBinId": "base",
+        "explanation": "NaOH (sodium hydroxide/lye) is a strong base — it releases OH⁻ ions when dissolved, giving pH ≈ 13–14."
+      },
+      {
+        "id": "chem-03",
+        "label": "Sodium Chloride",
+        "subLabel": "NaCl",
+        "icon": "🧂",
+        "correctBinId": "neutral_salt",
+        "explanation": "NaCl (table salt) is a neutral salt — formed from HCl + NaOH, it dissolves to give pH ≈ 7 with no excess H⁺ or OH⁻."
+      },
+      {
+        "id": "chem-04",
+        "label": "Sulfuric Acid",
+        "subLabel": "H₂SO₄",
+        "icon": "☠️",
+        "correctBinId": "acid",
+        "explanation": "H₂SO₄ (sulfuric acid) is a diprotic strong acid — releases 2 H⁺ ions per molecule, highly corrosive."
+      },
+      {
+        "id": "chem-05",
+        "label": "Ammonia",
+        "subLabel": "NH₃",
+        "icon": "💨",
+        "correctBinId": "base",
+        "explanation": "NH₃ (ammonia) is a weak base — it accepts H⁺ from water forming NH₄⁺ + OH⁻, giving pH ≈ 11."
+      },
+      {
+        "id": "chem-06",
+        "label": "Calcium Carbonate",
+        "subLabel": "CaCO₃",
+        "icon": "🪨",
+        "correctBinId": "neutral_salt",
+        "explanation": "CaCO₃ (chalk/limestone) is a salt of carbonic acid and calcium hydroxide — slightly basic but classified as a salt."
+      },
+      {
+        "id": "chem-07",
+        "label": "Nitric Acid",
+        "subLabel": "HNO₃",
+        "icon": "⚡",
+        "correctBinId": "acid",
+        "explanation": "HNO₃ (nitric acid) is a strong oxidizing acid used in fertilizers and explosives. pH ≈ 0–2."
+      },
+      {
+        "id": "chem-08",
+        "label": "Potassium Hydroxide",
+        "subLabel": "KOH",
+        "icon": "🧴",
+        "correctBinId": "base",
+        "explanation": "KOH (potassium hydroxide) is a strong base used in soap-making — releases OH⁻ ions, pH ≈ 13–14."
+      },
+      {
+        "id": "chem-09",
+        "label": "Potassium Nitrate",
+        "subLabel": "KNO₃",
+        "icon": "🧂",
+        "correctBinId": "neutral_salt",
+        "explanation": "KNO₃ (potassium nitrate/saltpeter) is a neutral salt used in fertilizers and food preservation."
+      },
+      {
+        "id": "chem-10",
+        "label": "Acetic Acid",
+        "subLabel": "CH₃COOH",
+        "icon": "🍶",
+        "correctBinId": "acid",
+        "explanation": "CH₃COOH (acetic acid) is the weak acid in vinegar — partially dissociates to give pH ≈ 2.4 at 5% concentration."
+      },
+      {
+        "id": "chem-11",
+        "label": "Calcium Hydroxide",
+        "subLabel": "Ca(OH)₂",
+        "icon": "🪣",
+        "correctBinId": "base",
+        "explanation": "Ca(OH)₂ (lime/slaked lime) is a moderately strong base used in construction and water treatment. pH ≈ 12."
+      },
+      {
+        "id": "chem-12",
+        "label": "Magnesium Sulfate",
+        "subLabel": "MgSO₄",
+        "icon": "🛁",
+        "correctBinId": "neutral_salt",
+        "explanation": "MgSO₄ (Epsom salt) is a neutral salt used in medicine and bath products — dissolves in water near pH 7."
+      },
+      {
+        "id": "chem-13",
+        "label": "Phosphoric Acid",
+        "subLabel": "H₃PO₄",
+        "icon": "🥤",
+        "correctBinId": "acid",
+        "explanation": "H₃PO₄ (phosphoric acid) is the weak acid in cola drinks — gives them tartness at pH ≈ 2.4."
+      },
+      {
+        "id": "chem-14",
+        "label": "Sodium Bicarbonate",
+        "subLabel": "NaHCO₃",
+        "icon": "🍪",
+        "correctBinId": "base",
+        "explanation": "NaHCO₃ (baking soda) is mildly basic — dissolves to release HCO₃⁻ which acts as a weak base, pH ≈ 8.3."
+      },
+      {
+        "id": "chem-15",
+        "label": "Sodium Sulfate",
+        "subLabel": "Na₂SO₄",
+        "icon": "🧂",
+        "correctBinId": "neutral_salt",
+        "explanation": "Na₂SO₄ (sodium sulfate/Glauber's salt) is a neutral salt formed from H₂SO₄ + 2NaOH, pH ≈ 7."
+      },
+      {
+        "id": "chem-16",
+        "label": "Citric Acid",
+        "subLabel": "C₆H₈O₇",
+        "icon": "🍋",
+        "correctBinId": "acid",
+        "explanation": "Citric acid is the triprotic weak acid found in citrus fruits — gives lemons and oranges their sour taste, pH ≈ 2.2."
+      },
+      {
+        "id": "chem-17",
+        "label": "Magnesium Hydroxide",
+        "subLabel": "Mg(OH)₂",
+        "icon": "💊",
+        "correctBinId": "base",
+        "explanation": "Mg(OH)₂ (milk of magnesia) is a mild base used as an antacid — neutralizes stomach acid, pH ≈ 10.5."
+      },
+      {
+        "id": "chem-18",
+        "label": "Copper Sulfate",
+        "subLabel": "CuSO₄",
+        "icon": "🟦",
+        "correctBinId": "neutral_salt",
+        "explanation": "CuSO₄ (copper sulfate) is a salt used in agriculture and electroplating — dissolves to a slightly acidic solution."
+      },
+      {
+        "id": "chem-19",
+        "label": "Carbonic Acid",
+        "subLabel": "H₂CO₃",
+        "icon": "🫧",
+        "correctBinId": "acid",
+        "explanation": "H₂CO₃ (carbonic acid) forms when CO₂ dissolves in water — makes fizzy drinks slightly acidic at pH ≈ 3.7."
+      },
+      {
+        "id": "chem-20",
+        "label": "Sodium Carbonate",
+        "subLabel": "Na₂CO₃",
+        "icon": "🧼",
+        "correctBinId": "base",
+        "explanation": "Na₂CO₃ (washing soda) is a strong base used in cleaning products — dissolves to pH ≈ 11.6."
+      },
+      {
+        "id": "chem-21",
+        "label": "Ammonium Chloride",
+        "subLabel": "NH₄Cl",
+        "icon": "🧂",
+        "correctBinId": "neutral_salt",
+        "explanation": "NH₄Cl is a salt formed from NH₃ + HCl — dissolves to a mildly acidic solution (pH ≈ 4.6), but is classified as a salt."
+      },
+      {
+        "id": "chem-22",
+        "label": "Hydrofluoric Acid",
+        "subLabel": "HF",
+        "icon": "⚠️",
+        "correctBinId": "acid",
+        "explanation": "HF (hydrofluoric acid) is a weak acid but extremely dangerous — used in glass etching, pH ≈ 3.2 at 1% concentration."
+      },
+      {
+        "id": "chem-23",
+        "label": "Barium Hydroxide",
+        "subLabel": "Ba(OH)₂",
+        "icon": "⚗️",
+        "correctBinId": "base",
+        "explanation": "Ba(OH)₂ (barium hydroxide) is a strong base — used in analytical chemistry, gives pH ≈ 13 in solution."
+      },
+      {
+        "id": "chem-24",
+        "label": "Iron(III) Chloride",
+        "subLabel": "FeCl₃",
+        "icon": "🦀",
+        "correctBinId": "neutral_salt",
+        "explanation": "FeCl₃ (iron trichloride) is a salt used in water treatment and electronics etching."
+      },
+      {
+        "id": "chem-25",
+        "label": "Lactic Acid",
+        "subLabel": "C₃H₆O₃",
+        "icon": "🏃",
+        "correctBinId": "acid",
+        "explanation": "Lactic acid is the weak acid produced in muscles during anaerobic exercise — also gives yogurt its sour taste."
+      },
+      {
+        "id": "chem-26",
+        "label": "Lithium Hydroxide",
+        "subLabel": "LiOH",
+        "icon": "🔋",
+        "correctBinId": "base",
+        "explanation": "LiOH (lithium hydroxide) is a strong base used in lithium batteries and CO₂ scrubbers on spacecraft."
+      }
     ],
     "seoGuideContent": {
       "overview": "This Acids, Bases, and Salts Chemistry Sorting Game challenges students to classify chemical compounds by their properties — pH, ion donation, and reaction behavior. Students drag chemical formula crates along an animated conveyor belt into the correct bin. Designed for Grades 8–10 Chemistry and aligned with NGSS PS1.B: Chemical Reactions.",
@@ -535,19 +1247,37 @@
         {
           "category": "Acid",
           "criteria": "pH < 7; donates H⁺ (protons) in solution; sour taste; corrodes metals; turns blue litmus red",
-          "examples": ["HCl (pH 0)", "H₂SO₄ (pH 0)", "CH₃COOH (pH 2.4)", "H₃PO₄ (pH 2.4)", "Citric Acid (pH 2.2)"],
+          "examples": [
+            "HCl (pH 0)",
+            "H₂SO₄ (pH 0)",
+            "CH₃COOH (pH 2.4)",
+            "H₃PO₄ (pH 2.4)",
+            "Citric Acid (pH 2.2)"
+          ],
           "keyIndicator": "Formula starts with H (except H₂O); releases H⁺ in water"
         },
         {
           "category": "Base",
           "criteria": "pH > 7; accepts H⁺ or donates OH⁻ in solution; slippery feel; turns red litmus blue",
-          "examples": ["NaOH (pH 13)", "NH₃ (pH 11)", "Ca(OH)₂ (pH 12)", "NaHCO₃ (pH 8.3)", "Na₂CO₃ (pH 11.6)"],
+          "examples": [
+            "NaOH (pH 13)",
+            "NH₃ (pH 11)",
+            "Ca(OH)₂ (pH 12)",
+            "NaHCO₃ (pH 8.3)",
+            "Na₂CO₃ (pH 11.6)"
+          ],
           "keyIndicator": "Formula contains OH⁻ group OR accepts H⁺ (like NH₃)"
         },
         {
           "category": "Neutral Salt",
           "criteria": "pH ≈ 7 (some vary slightly); ionic compound formed from acid + base neutralization reaction",
-          "examples": ["NaCl (pH 7)", "KNO₃ (pH 7)", "MgSO₄ (pH 7)", "Na₂SO₄ (pH 7)", "CaCO₃"],
+          "examples": [
+            "NaCl (pH 7)",
+            "KNO₃ (pH 7)",
+            "MgSO₄ (pH 7)",
+            "Na₂SO₄ (pH 7)",
+            "CaCO₃"
+          ],
           "keyIndicator": "Metal cation + nonmetal anion; product of HCl + NaOH type reaction"
         }
       ],
