@@ -25,18 +25,22 @@ interface AdConfigOptions {
   sound?: 'on' | 'off';
 }
 
-// ─── Session timer (tracks active play time for refresh gating) ───────────────
+// ─── Active engagement tracking ───────────────────────────────────────────────
 
 let sessionStartMs = 0;
-let totalEngagementMs = 0;
-let lastActiveTs = 0;
-let bannerRefreshTimer: ReturnType<typeof setInterval> | null = null;
+let lastInteractionTs = 0;
+let activeEngagementMs = 0;
+let lastTickTs = 0;
+let engagementTimer: ReturnType<typeof setInterval> | null = null;
 
 export function initAdController(): void {
-  sessionStartMs = Date.now();
-  lastActiveTs = Date.now();
+  const now = Date.now();
+  sessionStartMs = now;
+  lastInteractionTs = now;
+  lastTickTs = now;
+  activeEngagementMs = 0;
 
-  // Configure H5 Games Ads — preload breaks so they're ready instantly
+  // Configure H5 Games Ads — preload breaks so they are ready instantly
   if (typeof window.adConfig === 'function') {
     window.adConfig({
       preloadAdBreaks: 'on',
@@ -47,23 +51,29 @@ export function initAdController(): void {
     });
   }
 
-  // Schedule banner slot refresh every 30 seconds of active engagement
-  bannerRefreshTimer = setInterval(() => {
-    const now = Date.now();
-    if (now - lastActiveTs < 5000) {
-      totalEngagementMs += 30_000;
+  // Count active engagement seconds whenever document is visible and interacted recently
+  if (engagementTimer) clearInterval(engagementTimer);
+  engagementTimer = setInterval(() => {
+    const current = Date.now();
+    const dt = current - lastTickTs;
+    lastTickTs = current;
+
+    // Active if document is visible and user interacted within the last 20 seconds
+    if (!document.hidden && current - lastInteractionTs < 20_000) {
+      activeEngagementMs += dt;
     }
-  }, 30_000);
+  }, 1000);
 }
 
 /** Call on every user interaction to track active engagement */
 export function pingEngagement(): void {
-  lastActiveTs = Date.now();
+  const now = Date.now();
+  lastInteractionTs = now;
 }
 
 /** Returns total active engagement in milliseconds */
 export function getEngagementMs(): number {
-  return totalEngagementMs + (Date.now() - Math.max(sessionStartMs, lastActiveTs - 5000));
+  return activeEngagementMs;
 }
 
 // ─── Shift-break interstitial ─────────────────────────────────────────────────
@@ -79,13 +89,12 @@ export function triggerShiftBreakAd(opts: {
   const engagementSec = getEngagementMs() / 1000;
 
   if (typeof window.adBreak !== 'function') {
-    // H5 Games Ads not loaded — skip gracefully
     opts.onAfterAd();
     return;
   }
 
+  // Enforce 60-second viewability threshold
   if (engagementSec < 60) {
-    // Not enough engagement for a viewable ad — skip
     opts.onAfterAd();
     return;
   }
@@ -96,10 +105,8 @@ export function triggerShiftBreakAd(opts: {
     beforeAd: opts.onBeforeAd,
     afterAd: opts.onAfterAd,
     adBreakDone: (info) => {
-      console.debug('[AdController] Break done:', info.breakStatus);
-      if (info.breakStatus !== 'viewed') {
-        opts.onAfterAd();
-      }
+      console.debug('[AdController] Break done:', info?.breakStatus);
+      opts.onAfterAd();
     },
   });
 }
@@ -109,25 +116,19 @@ export function triggerShiftBreakAd(opts: {
 /**
  * Refresh a specific ad slot by slot ID.
  * Call after 30+ seconds of active engagement or between shifts.
- * Stub: replace with your ad network's refresh API (GPT, Prebid, etc.)
  */
 export function refreshBannerSlot(slotId: string): void {
-  // Google Publisher Tag example:
-  // if (window.googletag && window.googletag.pubads) {
-  //   const slot = window._adSlots?.[slotId];
-  //   if (slot) window.googletag.pubads().refresh([slot]);
-  // }
   console.debug(`[AdController] Refresh slot: ${slotId}`);
 
-  // Dispatch custom event for any external ad framework to listen to
+  // Dispatch custom event for external ad network handlers
   const event = new CustomEvent('adSlotRefresh', { detail: { slotId } });
   document.dispatchEvent(event);
 }
 
 /** Cleanup: call when leaving the game page */
 export function destroyAdController(): void {
-  if (bannerRefreshTimer) {
-    clearInterval(bannerRefreshTimer);
-    bannerRefreshTimer = null;
+  if (engagementTimer) {
+    clearInterval(engagementTimer);
+    engagementTimer = null;
   }
 }
