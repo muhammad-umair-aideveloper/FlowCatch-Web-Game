@@ -27,6 +27,20 @@ const jsonLd = {
       },
     },
     {
+      '@type': 'SoftwareApplication',
+      '@id': `${siteUrl}/#app`,
+      name: 'The Conveyor Belt Sorter',
+      url: siteUrl,
+      applicationCategory: 'GameApplication',
+      applicationSubCategory: 'EducationalGame',
+      operatingSystem: 'Web Browser',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    },
+    {
       '@type': 'ItemList',
       '@id': `${siteUrl}/#games`,
       name: 'Educational Sorting Games',
