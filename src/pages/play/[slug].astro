@@ -1,0 +1,214 @@
+---
+/**
+ * /play/[slug].astro
+ * Dynamic static routes — one page per taxonomy pack.
+ * Renders the game above the fold and the full SEO curriculum guide below.
+ */
+import { getStaticPaths } from '../_utils/packPaths.ts';
+import SeoGameLayout from '../../layouts/SeoGameLayout.astro';
+import ConveyorGame from '../../components/game/ConveyorGame.astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
+import type { TaxonomyPack } from '../../types/game.ts';
+
+export { getStaticPaths };
+
+interface Props {
+  pack: TaxonomyPack;
+}
+
+const { pack } = Astro.props;
+const canonicalUrl = `https://flowcatch-game.com/play/${pack.slug}`;
+
+// Peer packs for instant subject-switching
+import allPacks from '../../data/taxonomyPacks.json';
+const peerPacks = (allPacks as TaxonomyPack[]).filter(p => p.slug !== pack.slug);
+---
+
+<SeoGameLayout {pack} {canonicalUrl}>
+  <!-- ── Above-the-fold ────────────────────────────────────────────────── -->
+  <div class="max-w-4xl mx-auto px-3 sm:px-4 pt-4">
+
+    <!-- Breadcrumbs (semantic, crawlable) -->
+    <nav aria-label="Breadcrumb" class="mb-3">
+      <ol class="flex flex-wrap items-center gap-1 text-xs text-factory-500">
+        <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+        <li aria-hidden="true" class="text-factory-700">›</li>
+        <li><a href="/" class="hover:text-white transition-colors">{pack.subjectCategory}</a></li>
+        <li aria-hidden="true" class="text-factory-700">›</li>
+        <li class="text-slate-300" aria-current="page">{pack.seoTitle}</li>
+      </ol>
+    </nav>
+
+    <!-- H1 — above the fold, keyword-optimized -->
+    <h1 class="text-xl sm:text-2xl font-bold text-white mb-1 leading-tight">
+      {pack.h1Heading}
+    </h1>
+
+    <!-- Sub-meta line -->
+    <p class="text-factory-400 text-xs mb-4 flex flex-wrap gap-3">
+      <span>📚 {pack.gradeLevel}</span>
+      <span>⏱️ ~{pack.estimatedPlayTimeMinutes} min</span>
+      <span>📋 {pack.curriculumStandard}</span>
+    </p>
+
+    <!-- ── Game section (main canvas + bins) ──────────────────────────── -->
+    <section id="game-section" aria-label="Interactive sorting game">
+      <!-- 32px safety margin: ad slot is outside/below, not overlapping bins -->
+      <ConveyorGame {pack} />
+    </section>
+
+    <!-- ── Instant subject-switch links ───────────────────────────────── -->
+    <div class="mt-4 mb-6">
+      <p class="text-factory-400 text-xs mb-2 uppercase tracking-widest">Also play:</p>
+      <div class="flex flex-wrap gap-2">
+        {peerPacks.map(p => (
+          <a
+            href={`/play/${p.slug}`}
+            class="text-xs px-3 py-1.5 rounded-lg bg-factory-800 text-slate-300
+                   border border-factory-700 hover:bg-factory-700 hover:text-white
+                   transition-colors"
+          >
+            {p.bins.map(b => b.label).join(' / ')}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- ── Sidebar rect ad (desktop only) — above the guide ──────────── -->
+    <div class="hidden lg:flex justify-end mb-4">
+      <AdSlot variant="rectangle" id="sidebar-rect" />
+    </div>
+  </div>
+
+  <!-- ── Below-the-fold: Teacher & Student Curriculum Guide ────────────── -->
+  <article
+    class="max-w-4xl mx-auto px-3 sm:px-4 pb-16"
+    aria-label="Curriculum guide for teachers and students"
+  >
+    <hr class="border-factory-700 mb-8" />
+
+    <h2 class="text-xl font-bold text-white mb-3">
+      Teacher &amp; Student Curriculum Guide
+    </h2>
+
+    <!-- Overview -->
+    <section class="mb-8" aria-labelledby="guide-overview">
+      <h3 id="guide-overview" class="text-lg font-semibold text-arcade-cyan mb-2">
+        Overview
+      </h3>
+      <p class="text-slate-300 leading-relaxed text-sm">
+        {pack.seoGuideContent.overview}
+      </p>
+    </section>
+
+    <!-- Pedagogical objectives -->
+    <section class="mb-8" aria-labelledby="guide-objectives">
+      <h3 id="guide-objectives" class="text-lg font-semibold text-arcade-cyan mb-3">
+        Learning Objectives
+      </h3>
+      <ul class="space-y-2">
+        {pack.seoGuideContent.pedagogicalObjectives.map((obj) => (
+          <li class="flex gap-2 text-sm text-slate-300">
+            <span class="text-arcade-neon mt-0.5 shrink-0" aria-hidden="true">✓</span>
+            <span>{obj}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Sorting Rules Table (semantic HTML for crawlers) -->
+    <section class="mb-8" aria-labelledby="guide-rules">
+      <h3 id="guide-rules" class="text-lg font-semibold text-arcade-cyan mb-3">
+        Sorting Rules Reference
+      </h3>
+      <div class="overflow-x-auto rounded-xl border border-factory-700">
+        <table class="w-full text-sm" aria-label="Sorting rules for each category">
+          <thead>
+            <tr class="bg-factory-800 border-b border-factory-700">
+              <th scope="col" class="text-left px-4 py-3 text-slate-300 font-semibold">Category</th>
+              <th scope="col" class="text-left px-4 py-3 text-slate-300 font-semibold">Sorting Criteria</th>
+              <th scope="col" class="text-left px-4 py-3 text-slate-300 font-semibold hidden sm:table-cell">Examples</th>
+              <th scope="col" class="text-left px-4 py-3 text-slate-300 font-semibold hidden md:table-cell">Key Indicator</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pack.seoGuideContent.sortingRulesTable.map((row, i) => (
+              <tr class={`border-b border-factory-700/50 ${i % 2 === 0 ? 'bg-factory-900' : 'bg-factory-950'}`}>
+                <td class="px-4 py-3 font-semibold text-white whitespace-nowrap">{row.category}</td>
+                <td class="px-4 py-3 text-slate-300">{row.criteria}</td>
+                <td class="px-4 py-3 text-slate-400 hidden sm:table-cell">
+                  {row.examples.slice(0, 3).join(', ')}
+                  {row.examples.length > 3 && <span class="text-factory-500"> +{row.examples.length - 3} more</span>}
+                </td>
+                <td class="px-4 py-3 text-slate-400 hidden md:table-cell italic">{row.keyIndicator}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Common mistakes -->
+    <section class="mb-8" aria-labelledby="guide-mistakes">
+      <h3 id="guide-mistakes" class="text-lg font-semibold text-arcade-cyan mb-3">
+        Common Mistakes &amp; Corrections
+      </h3>
+      <div class="space-y-4">
+        {pack.seoGuideContent.commonStudentMistakes.map((m) => (
+          <div class="bg-factory-900 rounded-xl border border-factory-700 p-4">
+            <p class="text-sm text-red-400 mb-1">
+              <span class="font-semibold">❌ Mistake:</span> {m.mistake}
+            </p>
+            <p class="text-sm text-green-400 mb-1">
+              <span class="font-semibold">✅ Correction:</span> {m.correction}
+            </p>
+            <p class="text-xs text-slate-400 italic">{m.why}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ accordion -->
+    <section aria-labelledby="guide-faq">
+      <h3 id="guide-faq" class="text-lg font-semibold text-arcade-cyan mb-3">
+        Frequently Asked Questions
+      </h3>
+      <div class="space-y-3" itemscope itemtype="https://schema.org/FAQPage">
+        {pack.seoGuideContent.faqs.map((faq, i) => (
+          <details
+            class="bg-factory-900 rounded-xl border border-factory-700 group"
+            itemscope
+            itemprop="mainEntity"
+            itemtype="https://schema.org/Question"
+          >
+            <summary
+              class="flex items-center justify-between px-4 py-3 cursor-pointer
+                     list-none text-sm font-medium text-white hover:text-arcade-cyan
+                     transition-colors select-none"
+              itemprop="name"
+            >
+              <span>{faq.question}</span>
+              <span class="ml-2 text-factory-500 group-open:rotate-180 transition-transform" aria-hidden="true">▼</span>
+            </summary>
+            <div
+              class="px-4 pb-4 text-sm text-slate-300 leading-relaxed border-t border-factory-700 pt-3"
+              itemscope
+              itemprop="acceptedAnswer"
+              itemtype="https://schema.org/Answer"
+            >
+              <p itemprop="text">{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Bottom leaderboard refresh point -->
+    <div class="hidden md:flex justify-center mt-10">
+      <AdSlot variant="leaderboard" id="bottom-leaderboard" />
+    </div>
+    <div class="flex justify-center mt-6 md:hidden">
+      <AdSlot variant="rectangle" id="bottom-rect-mobile" />
+    </div>
+  </article>
+</SeoGameLayout>
