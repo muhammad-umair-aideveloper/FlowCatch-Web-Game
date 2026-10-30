@@ -550,46 +550,81 @@ export class ConveyorGameEngine {
     const beltY = this.getBeltY();
     const trackH = ITEM_H + 24;
 
-    // Belt track background
-    c.fillStyle = '#0f141c';
-    c.fillRect(0, beltY - 8, W, trackH + 16);
+    // Outer toy factory chassis background
+    c.fillStyle = '#1e293b';
+    this.roundRect(c, 0, beltY - 10, W, trackH + 20, 12);
+    c.fill();
 
-    // Animated tread pattern
-    c.fillStyle = '#1e2530';
+    // Belt track rubber surface
+    c.fillStyle = '#334155';
+    c.fillRect(6, beltY - 2, W - 12, trackH + 4);
+
+    // Animated rubber tread ridges
+    c.fillStyle = '#475569';
     const treadW = 32;
     const offset = this.beltOffset;
     for (let x = -treadW + (offset % treadW); x < W + treadW; x += treadW) {
-      c.fillRect(x, beltY, 4, trackH);
+      c.fillRect(x, beltY, 6, trackH);
     }
 
-    // Top/bottom rail
-    const grad = c.createLinearGradient(0, beltY - 8, 0, beltY + 4);
-    grad.addColorStop(0, '#3a4759');
-    grad.addColorStop(1, '#2d3748');
-    c.fillStyle = grad;
-    c.fillRect(0, beltY - 8, W, 8);
-    c.fillRect(0, beltY + trackH, W, 8);
+    // Top & bottom chassis rails with yellow hazard stripes
+    c.fillStyle = '#0f172a';
+    c.fillRect(0, beltY - 10, W, 8);
+    c.fillRect(0, beltY + trackH + 2, W, 8);
 
-    // Rollers
-    for (let x = 20; x < W; x += 80) {
-      c.fillStyle = '#3a4759';
+    // Hazard caution studs along the rails
+    for (let x = 16; x < W - 50; x += 40) {
+      c.fillStyle = '#facc15';
       c.beginPath();
-      c.ellipse(x, beltY - 8, 8, 8, 0, 0, Math.PI * 2);
+      c.arc(x, beltY - 6, 3, 0, Math.PI * 2);
       c.fill();
       c.beginPath();
-      c.ellipse(x, beltY + trackH + 8, 8, 8, 0, 0, Math.PI * 2);
+      c.arc(x, beltY + trackH + 6, 3, 0, Math.PI * 2);
       c.fill();
     }
 
-    // Danger zone / incinerator on right
-    const dangerX = W - 48;
-    const blink = Math.sin(Date.now() / 200) > 0;
-    c.fillStyle = blink ? '#ef444499' : '#ef444466';
-    c.fillRect(dangerX, beltY - 8, 48, trackH + 16);
-    c.fillStyle = blink ? '#fbbf24' : '#f59e0b';
-    c.font = 'bold 20px sans-serif';
+    // Rollers with gear hub details
+    for (let x = 20; x < W - 50; x += 70) {
+      c.fillStyle = '#f59e0b';
+      c.beginPath();
+      c.arc(x, beltY - 2, 6, 0, Math.PI * 2);
+      c.fill();
+      c.fillStyle = '#b45309';
+      c.beginPath();
+      c.arc(x, beltY - 2, 2.5, 0, Math.PI * 2);
+      c.fill();
+
+      c.fillStyle = '#f59e0b';
+      c.beginPath();
+      c.arc(x, beltY + trackH + 2, 6, 0, Math.PI * 2);
+      c.fill();
+      c.fillStyle = '#b45309';
+      c.beginPath();
+      c.arc(x, beltY + trackH + 2, 2.5, 0, Math.PI * 2);
+      c.fill();
+    }
+
+    // Danger incinerator chute on right — cartoonish fiery portal
+    const dangerX = W - 52;
+    const pulse = (Math.sin(Date.now() / 150) + 1) / 2;
+    const chuteGrad = c.createLinearGradient(dangerX, beltY - 8, dangerX + 52, beltY + trackH + 8);
+    chuteGrad.addColorStop(0, '#ef4444');
+    chuteGrad.addColorStop(0.5, '#f97316');
+    chuteGrad.addColorStop(1, '#dc2626');
+    c.fillStyle = chuteGrad;
+    this.roundRect(c, dangerX, beltY - 8, 52, trackH + 16, 8);
+    c.fill();
+
+    // Chute warning outline
+    c.strokeStyle = pulse > 0.5 ? '#fde047' : '#f97316';
+    c.lineWidth = 3;
+    this.roundRect(c, dangerX, beltY - 8, 52, trackH + 16, 8);
+    c.stroke();
+
+    // Fire emoji icon
+    c.font = '26px sans-serif';
     c.textAlign = 'center';
-    c.fillText('🔥', dangerX + 24, beltY + trackH / 2 + 8);
+    c.fillText('🔥', dangerX + 26, beltY + trackH / 2 + 10);
   }
 
   private drawItems(c: CanvasRenderingContext2D, now: number): void {
@@ -613,21 +648,47 @@ export class ConveyorGameEngine {
         drawY = beltY + (ITEM_H - item.height) / 2 - 4;
       }
 
-      // Shadow
-      c.shadowColor = 'rgba(0,0,0,0.4)';
-      c.shadowBlur = 8;
+      const isSelected = item.uid === this.state.selectedItemUid;
+
+      // 3D tactile crate styling
+      let bgColor = '#fef3c7';     // warm toy wooden crate
+      let borderColor = '#d97706'; // warm amber border
+      let bevelColor = '#b45309';  // 3D bottom bevel
+
+      if (item.isSpeedSurge) {
+        bgColor = '#fae8ff';      // electric purple bonus crate
+        borderColor = '#a855f7';
+        bevelColor = '#7e22ce';
+      } else if (item.isMystery && !item.isRevealed) {
+        bgColor = '#fef08a';      // mystery question box
+        borderColor = '#eab308';
+        bevelColor = '#a16207';
+      }
+
+      if (isSelected) {
+        borderColor = '#0284c7';  // cyan highlight
+        bevelColor = '#0369a1';
+      }
+
+      // Drop shadow for 3D depth
+      c.shadowColor = 'rgba(15, 23, 42, 0.25)';
+      c.shadowBlur = 6;
       c.shadowOffsetY = 4;
 
-      // Crate body
-      const isSelected = item.uid === this.state.selectedItemUid;
-      const bgColor = item.isSpeedSurge ? '#7c3aed' : (item.isMystery && !item.isRevealed ? '#374151' : '#1e2d3d');
-      const borderColor = isSelected ? '#f59e0b' : (item.isSpeedSurge ? '#a78bfa' : '#38bdf8');
-
-      c.fillStyle = bgColor;
-      c.strokeStyle = borderColor;
-      c.lineWidth = isSelected ? 3 : 2;
-      this.roundRect(c, drawX, drawY, ITEM_W, ITEM_H, 8);
+      // 3D Bottom Bevel
+      c.fillStyle = bevelColor;
+      this.roundRect(c, drawX, drawY + 4, ITEM_W, ITEM_H, 12);
       c.fill();
+
+      // Main Crate Face
+      c.fillStyle = bgColor;
+      this.roundRect(c, drawX, drawY, ITEM_W, ITEM_H, 12);
+      c.fill();
+
+      // Outer Border
+      c.strokeStyle = borderColor;
+      c.lineWidth = isSelected ? 3.5 : 2.5;
+      this.roundRect(c, drawX, drawY, ITEM_W, ITEM_H, 12);
       c.stroke();
 
       c.shadowColor = 'transparent';
@@ -635,28 +696,28 @@ export class ConveyorGameEngine {
       c.shadowOffsetY = 0;
 
       if (item.isMystery && !item.isRevealed) {
-        c.fillStyle = '#9ca3af';
-        c.font = '28px sans-serif';
+        c.fillStyle = '#a16207';
+        c.font = 'bold 30px "Fredoka", "Nunito", sans-serif';
         c.textAlign = 'center';
         c.fillText('❓', drawX + ITEM_W / 2, drawY + ITEM_H / 2 + 10);
       } else {
         // Icon
         c.font = '24px sans-serif';
         c.textAlign = 'center';
-        c.fillText(item.itemData.icon, drawX + ITEM_W / 2, drawY + 26);
+        c.fillText(item.itemData.icon, drawX + ITEM_W / 2, drawY + 25);
 
-        // Label
-        c.fillStyle = '#e2e8f0';
-        c.font = `bold 11px sans-serif`;
+        // Word Label — Deep Navy Ink for 100% crisp contrast
+        c.fillStyle = '#0f172a';
+        c.font = 'bold 12px "Fredoka", "Nunito", sans-serif';
         c.textAlign = 'center';
-        const label = item.itemData.label.length > 14 ? item.itemData.label.slice(0, 13) + '…' : item.itemData.label;
-        c.fillText(label, drawX + ITEM_W / 2, drawY + 44);
+        const label = item.itemData.label.length > 13 ? item.itemData.label.slice(0, 12) + '…' : item.itemData.label;
+        c.fillText(label, drawX + ITEM_W / 2, drawY + 43);
 
-        // Sub-label (e.g. chemical formula)
+        // Sub-label (chemical formula or clarification)
         if (item.itemData.subLabel) {
-          c.fillStyle = '#94a3b8';
-          c.font = '9px monospace';
-          c.fillText(item.itemData.subLabel, drawX + ITEM_W / 2, drawY + 57);
+          c.fillStyle = '#b45309';
+          c.font = 'bold 10px monospace';
+          c.fillText(item.itemData.subLabel, drawX + ITEM_W / 2, drawY + 56);
         }
       }
     }
@@ -667,12 +728,17 @@ export class ConveyorGameEngine {
       const age = now - popup.createdAt;
       const t = age / popup.duration;
       const alpha = Math.max(0, 1 - t * t);
-      const yOffset = -50 * t;
+      const yOffset = -55 * t;
 
       c.globalAlpha = alpha;
-      c.fillStyle = popup.color;
-      c.font = 'bold 18px sans-serif';
+      // White outline for text popups to pop against any background
+      c.strokeStyle = '#ffffff';
+      c.lineWidth = 4;
+      c.font = 'bold 22px "Fredoka", "Nunito", sans-serif';
       c.textAlign = 'center';
+      c.strokeText(popup.text, popup.x, popup.y + yOffset);
+
+      c.fillStyle = popup.color;
       c.fillText(popup.text, popup.x, popup.y + yOffset);
       c.globalAlpha = 1;
     }
