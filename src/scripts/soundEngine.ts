@@ -17,6 +17,13 @@ function getCtx(): AudioContext {
   return ctx;
 }
 
+export function resumeAudio(): void {
+  const c = getCtx();
+  if (c.state === 'suspended') {
+    c.resume();
+  }
+}
+
 /** Smooth gain ramp helper */
 function ramp(gain: GainNode, from: number, to: number, duration: number): void {
   const c = getCtx();
