@@ -33,9 +33,8 @@ import {
 
 const ITEM_W = 100;
 const ITEM_H = 64;
-const BELT_Y = 0;           // items sit on the belt track (offset from track top)
-const FLIGHT_DURATION = 0.4; // seconds for parabolic arc
-const POPUP_DURATION = 1200; // ms
+const FLIGHT_DURATION = 0.38; // seconds for parabolic arc
+const POPUP_DURATION = 1200;  // ms
 
 const SHIFT_CONFIGS: ShiftConfig[] = [
   {
@@ -53,7 +52,7 @@ const SHIFT_CONFIGS: ShiftConfig[] = [
     name: 'Shift 2',
     itemCount: 15,
     speedMultiplier: 1.3,
-    spawnIntervalMs: 2600,
+    spawnIntervalMs: 2500,
     hasSpeedSurge: true,
     hasMysteryCrates: false,
     targetDurationSec: 110,
@@ -106,6 +105,7 @@ export class ConveyorGameEngine {
   private ctx2d: CanvasRenderingContext2D;
   private pack: TaxonomyPack;
   private binRects: BinRect[] = [];
+  private binRectsProvider?: () => BinRect[];
   private rafId: number = 0;
   private lastTs: number = 0;
   private beltOffset: number = 0;
@@ -139,15 +139,18 @@ export class ConveyorGameEngine {
   // Event listeners
   private listeners: Array<(e: GameEvent) => void> = [];
 
-  // ── Interaction state ───────────────────────────────────────────────────────
+  // Interaction tracking
   private dragItem: ActiveConveyorItem | null = null;
   private pointerDown = false;
+  private pointerStartX = 0;
+  private pointerStartY = 0;
 
   constructor(canvas: HTMLCanvasElement, pack: TaxonomyPack) {
     this.canvas = canvas;
     this.ctx2d = canvas.getContext('2d')!;
     this.pack = pack;
     this.attachPointerEvents();
+    this.attachVisibilityHandler();
   }
 
   // ─── Public API ─────────────────────────────────────────────────────────────
@@ -161,6 +164,10 @@ export class ConveyorGameEngine {
     this.binRects = rects;
   }
 
+  setBinRectsProvider(provider: () => BinRect[]): void {
+    this.binRectsProvider = provider;
+  }
+
   start(): void {
     this.state.phase = 'shift_active';
     this.state.currentShift = 1;
@@ -172,11 +179,15 @@ export class ConveyorGameEngine {
     this.loadShift(1);
     startBeltHum();
     this.lastTs = performance.now();
-    this.loop(this.lastTs);
+    if (this.rafId) cancelAnimationFrame(this.rafId);
+    this.rafId = requestAnimationFrame(this.loop);
   }
 
   stop(): void {
-    cancelAnimationFrame(this.rafId);
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = 0;
+    }
     stopBeltHum();
     this.state.phase = 'idle';
   }
@@ -188,7 +199,8 @@ export class ConveyorGameEngine {
       this.loadShift(next);
       this.state.phase = 'shift_active';
       this.lastTs = performance.now();
-      this.loop(this.lastTs);
+      if (this.rafId) cancelAnimationFrame(this.rafId);
+      this.rafId = requestAnimationFrame(this.loop);
       startBeltHum();
     } else {
       this.emit({ type: 'game_over', history: this.state.shiftHistory });
@@ -204,9 +216,34 @@ export class ConveyorGameEngine {
   sortSelectedItem(binId: CategoryBinId): void {
     if (!this.state.selectedItemUid) return;
     const item = this.activeItems.find(i => i.uid === this.state.selectedItemUid);
-    if (!item || item.state !== 'conveyor') return;
+    if (!item || item.state !== 'conveyor') {
+      this.state.selectedItemUid = null;
+      return;
+    }
     this.state.selectedItemUid = null;
     this.launchToBin(item, binId);
+  }
+
+  // ─── Private: Tab Visibility ────────────────────────────────────────────────
+
+  private attachVisibilityHandler(): void {
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (this.rafId) {
+          cancelAnimationFrame(this.rafId);
+          this.rafId = 0;
+        }
+        stopBeltHum();
+      } else {
+        if (this.state.phase === 'shift_active') {
+          this.lastTs = performance.now();
+          startBeltHum();
+          if (!this.rafId) {
+            this.rafId = requestAnimationFrame(this.loop);
+          }
+        }
+      }
+    });
   }
 
   // ─── Private: Shift Management ──────────────────────────────────────────────
@@ -234,7 +271,7 @@ export class ConveyorGameEngine {
     this.currentPerf = this.blankPerf(shiftId);
     this.activeItems = [];
 
-    // Build shuffled queue — repeat items if pack has fewer than needed
+    // Build shuffled queue from pack items
     const base = shuffle(this.pack.items);
     const queue: TaxonomyItem[] = [];
     while (queue.length < cfg.itemCount) {
@@ -252,7 +289,11 @@ export class ConveyorGameEngine {
   private loop = (ts: number): void => {
     if (this.state.phase !== 'shift_active') return;
 
-    const dt = Math.min((ts - this.lastTs) / 1000, 0.05); // cap at 50ms
+    if (!this.lastTs) {
+      this.lastTs = ts;
+    }
+    // Delta-time in seconds, clamped to max 50ms to prevent teleportation on lag spikes
+    const dt = Math.min((ts - this.lastTs) / 1000, 0.05);
     this.lastTs = ts;
 
     this.update(dt, ts);
@@ -265,9 +306,9 @@ export class ConveyorGameEngine {
 
   private update(dt: number, now: number): void {
     const cfg = this.getShiftConfig();
-    const baseSpeed = 90 * cfg.speedMultiplier; // px/s at base
+    const baseSpeed = 90 * cfg.speedMultiplier;
 
-    // Spawn new items
+    // Spawn new items sequentially from shuffled queue
     if (
       this.shiftItemsSpawned < this.itemQueue.length &&
       now - this.lastSpawnTime >= cfg.spawnIntervalMs
@@ -277,22 +318,27 @@ export class ConveyorGameEngine {
       this.lastSpawnTime = now;
     }
 
-    // Belt scroll offset for visual animation
+    // Belt tread scroll animation
     this.beltOffset = (this.beltOffset + baseSpeed * dt * 0.5) % 32;
 
-    // Update each item
+    // Update active items
     for (let i = this.activeItems.length - 1; i >= 0; i--) {
       const item = this.activeItems[i]!;
 
       if (item.state === 'conveyor') {
         item.x += item.speed * dt;
 
-        // Hit the incinerator (right edge)
-        if (item.x > this.canvas.width - 20) {
+        // Reveal mystery crates at 35% belt width
+        if (item.isMystery && !item.isRevealed && item.x >= this.canvas.width * 0.35) {
+          item.isRevealed = true;
+        }
+
+        // Cross right edge into incinerator danger chute
+        if (item.x > this.canvas.width - 24) {
           item.state = 'falling_incinerator';
           playIncinerate();
           this.recordMiss(item, 'missed_off_edge');
-          setTimeout(() => this.removeItem(item.uid), 500);
+          setTimeout(() => this.removeItem(item.uid), 450);
         }
       } else if (item.state === 'parabolic_flight') {
         item.flightProgress += dt / FLIGHT_DURATION;
@@ -309,14 +355,14 @@ export class ConveyorGameEngine {
           item.y = item.flightStartY + (item.flightTargetY - item.flightStartY) * ease + arc;
         }
       } else if (item.state === 'falling_incinerator') {
-        item.y += 200 * dt;
+        item.y += 240 * dt;
       }
     }
 
-    // Update popups
+    // Expire popups
     this.popups = this.popups.filter(p => now - p.createdAt < p.duration);
 
-    // Shift complete check
+    // Check shift completion
     if (
       this.shiftItemsSpawned >= this.itemQueue.length &&
       this.activeItems.filter(i => i.state === 'conveyor' || i.state === 'dragged' || i.state === 'parabolic_flight').length === 0
@@ -331,9 +377,9 @@ export class ConveyorGameEngine {
     cfg: ShiftConfig,
     now: number,
   ): void {
-    const isMystery = cfg.hasMysteryCrates && Math.random() < 0.2;
-    const isSpeedSurge = cfg.hasSpeedSurge && Math.random() < 0.15;
-    const speed = baseSpeed * (isSpeedSurge ? 2.0 : 1.0);
+    const isMystery = cfg.hasMysteryCrates && Math.random() < 0.25;
+    const isSpeedSurge = cfg.hasSpeedSurge && Math.random() < 0.2;
+    const speed = baseSpeed * (isSpeedSurge ? 1.8 : 1.0);
 
     if (isSpeedSurge) playSpeedSurge();
 
@@ -365,16 +411,22 @@ export class ConveyorGameEngine {
   }
 
   private launchToBin(item: ActiveConveyorItem, binId: CategoryBinId): void {
+    if (this.binRectsProvider) {
+      this.binRects = this.binRectsProvider();
+    }
     const bin = this.binRects.find(b => b.id === binId);
     if (!bin) return;
 
     playDrop();
 
+    const startX = item.state === 'dragged' ? (item.dragCurrentX - item.dragOffsetX) : item.x;
+    const startY = item.state === 'dragged' ? (item.dragCurrentY - item.dragOffsetY) : this.getBeltY();
+
     item.state = 'parabolic_flight';
     item.targetBinId = binId;
     item.flightProgress = 0;
-    item.flightStartX = item.state === 'dragged' ? item.dragCurrentX : item.x;
-    item.flightStartY = item.state === 'dragged' ? item.dragCurrentY : this.getBeltY();
+    item.flightStartX = startX;
+    item.flightStartY = startY;
     item.flightTargetX = bin.x + bin.width / 2 - ITEM_W / 2;
     item.flightTargetY = bin.y + 10;
   }
@@ -386,14 +438,17 @@ export class ConveyorGameEngine {
     if (correct) {
       this.state.streak++;
       this.state.maxStreak = Math.max(this.state.maxStreak, this.state.streak);
-      const pts = 100 + (this.state.streak - 1) * 25;
+      const multiplier = item.isSpeedSurge ? 2 : 1;
+      const pts = (100 + (this.state.streak - 1) * 25) * multiplier;
       this.state.score += pts;
       this.currentPerf.sortedCorrectly++;
       this.currentPerf.pointsEarned += pts;
       playCorrect(Math.min(this.state.streak, 4));
-      this.addPopup(`+${pts}`, item.flightTargetX + ITEM_W / 2, item.flightTargetY, '#4ade80');
+
+      const popupLabel = multiplier > 1 ? `+${pts} (2x Bonus!)` : `+${pts}`;
+      this.addPopup(popupLabel, item.flightTargetX + ITEM_W / 2, item.flightTargetY, '#4ade80');
       if (this.state.streak >= 3) {
-        this.addPopup(`🔥 x${this.state.streak}`, item.flightTargetX + ITEM_W / 2, item.flightTargetY - 30, '#f59e0b');
+        this.addPopup(`🔥 x${this.state.streak}`, item.flightTargetX + ITEM_W / 2, item.flightTargetY - 28, '#f59e0b');
       }
     } else {
       this.state.streak = 0;
@@ -401,6 +456,7 @@ export class ConveyorGameEngine {
       this.currentPerf.sortedIncorrectly++;
       playError();
       this.addPopup('✗ Wrong!', item.flightTargetX + ITEM_W / 2, item.flightTargetY, '#f87171');
+      this.emit({ type: 'life_lost', lives: this.state.lives });
     }
 
     this.currentPerf.totalItems++;
@@ -424,6 +480,7 @@ export class ConveyorGameEngine {
 
   private recordMiss(item: ActiveConveyorItem, action: string): void {
     this.state.streak = 0;
+    this.state.lives = Math.max(0, this.state.lives - 1);
     this.shiftItemsSettled++;
     this.currentPerf.incinerated++;
     this.currentPerf.totalItems++;
@@ -434,7 +491,13 @@ export class ConveyorGameEngine {
       correctCategory: bin?.label ?? item.itemData.correctBinId,
       reason: item.itemData.explanation,
     });
+
+    this.emit({ type: 'life_lost', lives: this.state.lives });
     this.emit({ type: 'score_update', score: this.state.score, streak: 0 });
+
+    if (this.state.lives <= 0) {
+      setTimeout(() => this.endGame(), 400);
+    }
   }
 
   private completeShift(): void {
@@ -442,7 +505,10 @@ export class ConveyorGameEngine {
     this.state.phase = 'shift_break';
     this.currentPerf.maxStreak = this.state.maxStreak;
     this.state.shiftHistory.push({ ...this.currentPerf });
-    cancelAnimationFrame(this.rafId);
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = 0;
+    }
     stopBeltHum();
     playShiftComplete();
     this.emit({ type: 'shift_complete', performance: { ...this.currentPerf } });
@@ -450,7 +516,10 @@ export class ConveyorGameEngine {
 
   private endGame(): void {
     this.state.phase = 'game_over';
-    cancelAnimationFrame(this.rafId);
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = 0;
+    }
     stopBeltHum();
     this.emit({ type: 'game_over', history: [...this.state.shiftHistory] });
   }
@@ -566,7 +635,6 @@ export class ConveyorGameEngine {
       c.shadowOffsetY = 0;
 
       if (item.isMystery && !item.isRevealed) {
-        // Mystery crate
         c.fillStyle = '#9ca3af';
         c.font = '28px sans-serif';
         c.textAlign = 'center';
@@ -584,7 +652,7 @@ export class ConveyorGameEngine {
         const label = item.itemData.label.length > 14 ? item.itemData.label.slice(0, 13) + '…' : item.itemData.label;
         c.fillText(label, drawX + ITEM_W / 2, drawY + 44);
 
-        // Sub-label (formula)
+        // Sub-label (e.g. chemical formula)
         if (item.itemData.subLabel) {
           c.fillStyle = '#94a3b8';
           c.font = '9px monospace';
@@ -665,6 +733,9 @@ export class ConveyorGameEngine {
     const { x, y } = this.getCanvasPos(e);
     const beltY = this.getBeltY();
 
+    this.pointerStartX = e.clientX;
+    this.pointerStartY = e.clientY;
+
     for (let i = this.activeItems.length - 1; i >= 0; i--) {
       const item = this.activeItems[i]!;
       if (item.state !== 'conveyor') continue;
@@ -673,11 +744,13 @@ export class ConveyorGameEngine {
       const iy = beltY + (ITEM_H - item.height) / 2 - 4;
 
       if (aabbHit(x, y, 1, 1, ix, iy, ITEM_W, ITEM_H)) {
-        // Reveal mystery on click
+        // Reveal mystery on click immediately
         if (item.isMystery && !item.isRevealed) {
           item.isRevealed = true;
-          return;
         }
+
+        this.selectItem(item.uid);
+
         this.canvas.setPointerCapture(e.pointerId);
         this.pointerDown = true;
         item.state = 'dragged';
@@ -703,11 +776,14 @@ export class ConveyorGameEngine {
     if (!this.dragItem) return;
     const { x, y } = this.getCanvasPos(e);
 
-    // Check AABB against each bin
+    // Refresh bin coordinates before hit testing
+    if (this.binRectsProvider) {
+      this.binRects = this.binRectsProvider();
+    }
+
     let dropped = false;
     for (const bin of this.binRects) {
       if (aabbHit(x, y, 1, 1, bin.x, bin.y, bin.width, bin.height)) {
-        this.dragItem.state = 'conveyor'; // reset before launch
         this.launchToBin(this.dragItem, bin.id);
         dropped = true;
         break;
@@ -715,7 +791,11 @@ export class ConveyorGameEngine {
     }
 
     if (!dropped) {
-      // Return to belt
+      const distMoved = Math.hypot(e.clientX - this.pointerStartX, e.clientY - this.pointerStartY);
+      if (distMoved < 10) {
+        // User tapped to select without dragging — keep item selected for tap-bin sorting
+        this.state.selectedItemUid = this.dragItem.uid;
+      }
       this.dragItem.state = 'conveyor';
     }
 
